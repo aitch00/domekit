@@ -1,0 +1,23 @@
+{
+  "name": "domekit",
+  "version": "0.1.0",
+  "description": "6 skill del dome-method per discovery, design e realizzazione di prodotti digitali: personas, journeys, user-flow, domain model, prototipi navigabili e revisione.",
+  "author": {
+    "name": "dome-method",
+    "url": "https://github.com/aitch00/domekit"
+  },
+  "homepage": "https://github.com/aitch00/domekit",
+  "license": "MIT",
+  "keywords": [
+    "dome-method",
+    "discovery",
+    "design",
+    "ux",
+    "personas",
+    "journeys",
+    "user-flows",
+    "domain-modeling",
+    "prototyping",
+    "product"
+  ]
+}
