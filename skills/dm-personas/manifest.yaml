@@ -51,7 +51,7 @@ research_policy:
   trigger: gap-driven            # corpus come grounding del discovery; 3 stadi (esplicito/default/gap-driven)
 
 consumes_contracts:
-  - contract: ../_shared/dm-research/research-digest-schema.md
+  - contract: ../dome-shared/dm-research/research-digest-schema.md
     schema_version: ">=0.1.0"    # consuma il digest corpus di dm:research-corpus
 
 harvest_policy:

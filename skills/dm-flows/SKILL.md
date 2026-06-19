@@ -167,7 +167,7 @@ gli anchor su `remove`.
 ### I1. Carica e valida il changeset
 
 Leggi il changeset; deve essere conforme a
-[`changeset-contract@1.0.0`](../_shared/dm-design/changeset-contract.md):
+[`changeset-contract@1.0.0`](../dome-shared/dm-design/changeset-contract.md):
 - frontmatter con `type: changeset`, `target_flow` (il `flow-*.md` da aggiornare), `status: complete`;
 - una sezione `## Delta` con la tabella (`# · anchor · tipo · richiesta · dettaglio`).
 
@@ -176,7 +176,7 @@ un `anchor` non-`NEW` che non risolve nel flow, un `tipo` non ammesso) → **fer
 è un changeset difettoso, non un buco da indovinare.
 
 **Gate di conformità del flow bersaglio.** Prima di mappare, verifica che il `target_flow`
-sia conforme a [`flow-handoff-contract@1.0.0`](../_shared/dm-design/flow-handoff-contract.md):
+sia conforme a [`flow-handoff-contract@1.0.0`](../dome-shared/dm-design/flow-handoff-contract.md):
 deve avere una sezione **Screen Inventory** con anchor `sc.<slug>` e Happy Path con `id` `s.<slug>`.
 Se il flow **non ha alcuna mappa anchor** (Screen Inventory assente, zero `sc.`/`s.` — tipico dei
 flow **legacy pre-contratto**), **ferma con rimedio esplicito**: *"il flow `<path>` precede

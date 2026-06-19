@@ -24,7 +24,7 @@ deposita nel contratto.
 
 Dominio: design. Categoria: ux-research (round-trip). **Non** consuma database L3.
 
-Produce-conforme a [`../_shared/dm-design/changeset-contract.md`](../_shared/dm-design/changeset-contract.md)@1.0.0
+Produce-conforme a [`../dome-shared/dm-design/changeset-contract.md`](../dome-shared/dm-design/changeset-contract.md)@1.0.0
 (handoff verso `dm:flows`). Assume in input un **prototipo materializzato da un flow**: il
 prototipo porta il riferimento al `flow-*.md` di provenienza (sidecar/meta o, in fallback,
 `--flow`). Questo è il vincolo che tiene il processo semplice → vedi *Vincolo* sotto.
@@ -119,7 +119,7 @@ AskUserQuestion (header: "Edit"):
 ## Export del changeset (su "soddisfatto")
 
 Scrivi `docs/dome/changesets/changeset-<feature-slug>.md` conforme a
-[`changeset-contract@1.1.0`](../_shared/dm-design/changeset-contract.md): frontmatter
+[`changeset-contract@1.1.0`](../dome-shared/dm-design/changeset-contract.md): frontmatter
 (`type: changeset`, `target_flow`, `upstream: [<prototipo>, <target_flow>]`, `consumed_by: dm:flows`,
 `status: complete`, **`source: edit`**) + sezione `## Delta` con tutte le righe di contratto loggate.
 (`source: edit` segna la provenienza: edit deliberato, non ipotesi da validazione — vedi *Produttori*

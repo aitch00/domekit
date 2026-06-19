@@ -29,14 +29,14 @@ io_schema:
     - artifact: changeset
       format: markdown
       schema: handoff-v1
-      conforms_to: ../_shared/dm-design/changeset-contract.md@1.1.0   # delta di contratto, anchor sc./s.; source: edit
+      conforms_to: ../dome-shared/dm-design/changeset-contract.md@1.1.0   # delta di contratto, anchor sc./s.; source: edit
 
 consumes_databases: []
 
 consumes_contracts:
-  - contract: ../_shared/dm-design/changeset-contract.md
+  - contract: ../dome-shared/dm-design/changeset-contract.md
     schema_version: ">=1.1.0"     # produce-conforme: lo schema del changeset esportato (source: edit)
-  - contract: ../_shared/dm-design/flow-handoff-contract.md
+  - contract: ../dome-shared/dm-design/flow-handoff-contract.md
     schema_version: ">=1.0.0"     # legge il flow per la mappa anchor (sc.<slug>/s.<slug>)
 
 dispatches_agents: []

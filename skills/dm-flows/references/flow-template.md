@@ -2,7 +2,7 @@
 
 Scheletro canonico dei file prodotti da `dm:flows`. La skill **non** ridichiara la
 struttura nel corpo: la legge da qui. Questo template è l'**istanza** dello schema
-condiviso [`flow-handoff-contract@1.0.0`](../../_shared/dm-design/flow-handoff-contract.md)
+condiviso [`flow-handoff-contract@1.0.0`](../../dome-shared/dm-design/flow-handoff-contract.md)
 — il contratto a cui `dm:flows` produce-conforme e i consumatori (`dm:prototype`,
 `dm:blueprint`) leggono-conforme. Se cambi la struttura, bumpa **anche** il contratto. Mantiene il contratto handoff
 (`02-principio-handoff@1.1.0`) — frontmatter con `upstream`/`weak_sections`, `role`

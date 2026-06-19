@@ -45,4 +45,4 @@ repo. Questo file è l'indice operativo. Se una regola cambia, cambia **una volt
   - `dm-landing-qa/references/qa-checklist.md` — checklist QA (incl. sez. E depth)
 - `surface-treatments.csv` ha **un solo consumatore** (dm-landing-design) → è una **reference privata**,
   non un database L3 (criterio dei ≥2 consumatori). Se un secondo consumatore emerge, va promossa a
-  `_shared/` con schema + changelog.
+  `dome-shared/` con schema + changelog.

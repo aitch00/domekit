@@ -49,7 +49,7 @@ Il flow è l'**upstream obbligatorio**: senza, l'atomo non procede.
   ```
   Offri di uscire e lanciare `dm:flows`. Non inventare un flow da zero.
 
-Leggi il flow secondo il **flow-handoff-contract** (`../_shared/dm-design/flow-handoff-contract.md`):
+Leggi il flow secondo il **flow-handoff-contract** (`../dome-shared/dm-design/flow-handoff-contract.md`):
 - **Overview** — attori, trigger, **precondizioni** (definiscono lo stato d'ingresso)
 - **Happy Path** — ogni step con `Schermata` (Screen ID), `Azione`, **System Response**, **Outcome →**
 - **Screen Inventory** — una riga per schermata (`sc.<slug>`): elementi UI/CTA con il loro stato +

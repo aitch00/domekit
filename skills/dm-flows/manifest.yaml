@@ -33,7 +33,7 @@ io_schema:
     - artifact: flow
       format: markdown
       schema: handoff-v1                    # frontmatter con upstream + weak_sections
-      conforms_to: ../_shared/dm-design/flow-handoff-contract.md@1.0.0  # struttura body (Screen Inventory, Happy Path arricchito)
+      conforms_to: ../dome-shared/dm-design/flow-handoff-contract.md@1.0.0  # struttura body (Screen Inventory, Happy Path arricchito)
     - artifact: flows-overview
       format: markdown
       schema: handoff-v1
@@ -57,9 +57,9 @@ research_policy:
   trigger: gap-driven            # corpus come grounding del discovery; 3 stadi (esplicito/default/gap-driven)
 
 consumes_contracts:
-  - contract: ../_shared/dm-research/research-digest-schema.md
+  - contract: ../dome-shared/dm-research/research-digest-schema.md
     schema_version: ">=0.1.0"    # consuma il digest corpus di dm:research-corpus
-  - contract: ../_shared/dm-design/changeset-contract.md
+  - contract: ../dome-shared/dm-design/changeset-contract.md
     schema_version: ">=1.0.0"    # ramo ingest: assorbe il changeset di dm:revise nel target_flow
 
 harvest_policy:
@@ -97,7 +97,7 @@ evolution_log:
     type: patch
     summary: >
       Estratto lo schema body del flow nel contratto condiviso versionato
-      flow-handoff-contract@1.0.0 (_shared/dm-design/): dm:flows produce-conforme,
+      flow-handoff-contract@1.0.0 (dome-shared/dm-design/): dm:flows produce-conforme,
       dm:prototype (e domani dm:blueprint) consuma-conforme. Disaccoppia produttore e
       consumatore — se il template del flow cambia, si bumpa il contratto e il mismatch
       di schema_version rende il drift visibile invece che silenzioso. io_schema.output

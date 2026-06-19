@@ -59,7 +59,7 @@ consumes_databases: []
 dispatches_agents: []
 
 consumes_contracts:
-  - contract: ../_shared/dm-design/flow-handoff-contract.md
+  - contract: ../dome-shared/dm-design/flow-handoff-contract.md
     schema_version: ">=1.0.0"   # legge il flow contro lo schema condiviso; il mismatch = drift visibile
 
 consumes_handoff:
