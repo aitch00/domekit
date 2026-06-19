@@ -1,0 +1,85 @@
+skill: dm-domain-modeler
+version: 0.4.0
+type: atom-dominio
+domain: design          # verticale: design/domain modeling (collocata in .claude/skills come comando dm-*)
+category: domain-modeling
+
+implements:
+  - principle: 03-principio-atomi
+    version: 1.1.0
+    status: in-sync
+  - principle: 02-principio-handoff
+    version: 1.1.0
+    status: in-sync
+
+modes:
+  - guided
+  - yolo
+  - headless
+
+io_schema:
+  input:
+    - field: shared_content
+      type: list[path]   # discovery/domain-glossary, docs/dome/product-brief, brainstorming, flows, personas, PRD
+      required: false
+  output:
+    - artifact: domain-model
+      format: markdown
+      schema: handoff-v1   # frontmatter con upstream + weak_sections + erDiagram embedded
+
+consumes_databases: []
+
+research_policy:
+  intents: [corpus]
+  trigger: gap-driven            # corpus come grounding del discovery; 3 stadi (esplicito/default/gap-driven)
+
+consumes_contracts:
+  - contract: ../_shared/dm-research/research-digest-schema.md
+    schema_version: ">=0.1.0"    # consuma il digest corpus di dm:research-corpus
+
+harvest_policy:
+  domain: opt-in
+  solution: opt-in
+  method: opt-in
+
+status: in-sync
+evolution_log:
+  - version: 0.4.0
+    date: 2026-06-10
+    type: minor
+    summary: >
+      Merge delle due linee parallele (riconciliazione corpus-index). Da main
+      (U2): conformita' al contratto handoff 02-principio-handoff@1.1.0 —
+      frontmatter con role (single|overview), id e anchor di elemento,
+      rigenerazione anchor-preserving. Dalla linea ricerca (B5/C3): grounding
+      del discovery via dm:research-corpus (research_policy intent corpus +
+      consumes_contracts research-digest; degradazione a scansione diretta) e
+      03-principio-atomi@1.1.0 (esenzione grounding di servizio). Le due 0.3.0
+      parallele convergono qui. implements: 03@1.1.0 + 02@1.1.0.
+  - version: 0.3.0
+    date: 2026-06-09
+    type: minor
+    summary: >
+      Conformità al contratto handoff (02-principio-handoff@1.1.0): frontmatter di
+      output con produced_by/produced_at/principle_versions/type/process/upstream,
+      role single e id. Anchor: entità e.<nome>, relazioni rel.<A>-<B>, glossario
+      colonna id g.<slug>. Rigenerazione anchor-preserving. Parte di U2 del piano
+      dm:blueprint v0.3.
+  - version: 0.2.0
+    date: 2026-06-05
+    type: minor
+    summary: >
+      Refactor della modalità di interazione verso il dome-method. Asse unico
+      guided/yolo/headless (al posto di AI/manual + autonomous). Discovery allargata:
+      le entità vengono dedotte da brief/brainstorm/flows/personas oltre che dal
+      domain-glossary (prima unica fonte), con fallback alla richiesta a freddo solo
+      se non c'è contenuto. I 4 gate restano come pattern di verifica; il self-check
+      Mermaid è inquadrato come Review interna. Handoff con upstream + weak_sections.
+  - version: 0.1.0
+    date: 2026-06-05
+    type: initial
+    summary: >
+      Prima versione manifestata. Atomo-dominio di domain modeling allineato al
+      dome-method v2: aggiunto manifest L4, output spostato sotto
+      docs/dome/domain-model/. Le 13 regole di validazione Mermaid erDiagram e il
+      template di output restano nelle references.

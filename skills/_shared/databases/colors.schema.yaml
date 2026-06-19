@@ -1,0 +1,91 @@
+# colors.schema.yaml
+# Contratto del database L3 colors.csv. Conforme a 05-principio-database (1.1.0).
+version: 1.0.0
+file: colors.csv
+description: >
+  161 palette semantiche complete, una per product type (16 colonne hex 1:1 con products.csv). E' la fonte primaria della mappatura palette → contratto-token. Lookup per Product Type.
+format:
+  delimiter: ","
+  header: true
+  quoting: minimal
+primary_key: "Product Type"
+consumers:
+  - dm-ui-styles             # produttore design-context (lookup per product type, C2)
+  - colorize (L1)            # uso storico suite dome-design, non a manifest
+  - design-for-product-type (L4) # uso storico, non a manifest
+columns:
+  - name: "No"
+    type: integer
+    required: true
+    unique: true
+  - name: "Product Type"
+    type: string
+    required: true
+    unique: true
+  - name: "Primary"
+    type: string
+    required: true
+    pattern: '^#[0-9A-Fa-f]{6}$'
+  - name: "On Primary"
+    type: string
+    required: true
+    pattern: '^#[0-9A-Fa-f]{6}$'
+  - name: "Secondary"
+    type: string
+    required: true
+    pattern: '^#[0-9A-Fa-f]{6}$'
+  - name: "On Secondary"
+    type: string
+    required: true
+    pattern: '^#[0-9A-Fa-f]{6}$'
+  - name: "Accent"
+    type: string
+    required: true
+    pattern: '^#[0-9A-Fa-f]{6}$'
+  - name: "On Accent"
+    type: string
+    required: true
+    pattern: '^#[0-9A-Fa-f]{6}$'
+  - name: "Background"
+    type: string
+    required: true
+    pattern: '^#[0-9A-Fa-f]{6}$'
+  - name: "Foreground"
+    type: string
+    required: true
+    pattern: '^#[0-9A-Fa-f]{6}$'
+  - name: "Card"
+    type: string
+    required: true
+    pattern: '^#[0-9A-Fa-f]{6}$'
+  - name: "Card Foreground"
+    type: string
+    required: true
+    pattern: '^#[0-9A-Fa-f]{6}$'
+  - name: "Muted"
+    type: string
+    required: true
+    pattern: '^#[0-9A-Fa-f]{6}$'
+  - name: "Muted Foreground"
+    type: string
+    required: true
+    pattern: '^#[0-9A-Fa-f]{6}$'
+  - name: "Border"
+    type: string
+    required: true
+    pattern: '^#[0-9A-Fa-f]{6}$'
+  - name: "Destructive"
+    type: string
+    required: true
+    pattern: '^#[0-9A-Fa-f]{6}$'
+  - name: "On Destructive"
+    type: string
+    required: true
+    pattern: '^#[0-9A-Fa-f]{6}$'
+  - name: "Ring"
+    type: string
+    required: true
+    pattern: '^#[0-9A-Fa-f]{6}$'
+  - name: "Notes"
+    type: string
+    required: true

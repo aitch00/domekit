@@ -1,0 +1,111 @@
+skill: dm-prototype
+version: 0.2.0
+type: atom-dominio
+domain: design          # verticale: design/prototyping (collocata in .claude/skills come comando dm-*)
+category: prototyping
+
+implements:
+  - principle: 03-principio-atomi
+    version: 1.0.0
+    status: in-sync
+  - principle: 02-principio-handoff
+    version: 1.1.0
+    status: in-sync
+  - principle: 04-principio-livelli
+    version: 1.0.0
+    status: in-sync
+
+patterns:
+  - pattern: 06-triage-complessita
+    mode: manual            # triage_source: manual — lightweight|deep dichiarato dall'utente
+  - pattern: 08-modalita-esecuzione
+    modes: [guided, headless]
+
+modes:
+  - guided
+  - headless
+
+triage:
+  source: manual
+  levels: [lightweight, deep]
+  default: lightweight
+
+io_schema:
+  input:
+    - field: flow
+      type: handoff          # docs/dome/flows/flow-*.md (markdown handoff)
+      required: true
+    - field: domain_model
+      type: handoff          # docs/dome/domain-model/domain-model.md
+      required: false
+    - field: purpose
+      type: enum[validation, client]
+      required: false
+      default: validation
+    - field: triage
+      type: enum[lightweight, deep]
+      required: false
+      default: lightweight
+  output:
+    - artifact: prototype-payload
+      format: html           # index.html (+ assets/mock.json) — payload non-textual
+      schema: navigable-prototype-v1
+    - artifact: prototype-handoff
+      format: yaml           # index.meta.yaml — sidecar handoff
+      schema: handoff-v1     # frontmatter canonico + estensioni (source_flow, purpose, screens_count)
+
+consumes_databases: []
+
+dispatches_agents: []
+
+consumes_contracts:
+  - contract: ../_shared/dm-design/flow-handoff-contract.md
+    schema_version: ">=1.0.0"   # legge il flow contro lo schema condiviso; il mismatch = drift visibile
+
+consumes_handoff:
+  - flow                     # da dm:flows — upstream obbligatorio (conforme a flow-handoff-contract)
+  - domain-model             # da dm:domain-modeler — upstream opzionale, alza la qualità dei mock
+
+handoff:
+  enabled: true
+  downstream:
+    - flow-to-prototype      # composto (post-validazione, non ancora costruito)
+
+harvest_policy:
+  domain: opt-in             # pattern di prototipazione settoriali, rari
+  solution: auto             # soluzioni di navigazione/mock ricorrenti, capitalizzabili
+  method: every-3-uses       # confronto fra approcci di prototipazione nel tempo
+
+status: in-sync
+evolution_log:
+  - version: 0.2.0
+    date: 2026-06-14
+    type: minor
+    summary: >
+      Consuma il contratto arricchito del flow (flow-handoff-contract@1.0.0): legge lo
+      Screen Inventory (obbligatorio) come contratto materiale e chiude il "campo libero"
+      verso il flow. Una schermata per riga di Screen Inventory (sc.<slug>), non per step
+      (no duplicati); renderizza TUTTI gli stati dichiarati (default/vuoto/loading/errore/
+      success) con state-switcher, anche in lightweight; CTA con stato (enable + in-flight,
+      errori inline); System Response mostrata, non inventata; Outcome-> cablato; stato
+      errore legato a trigger+recovery; conferma azioni distruttive. Self-check esteso a 7
+      punti; prototype-contract aggiornato (8 requisiti). consumes_contracts popolato:
+      il mismatch di schema_version rende il drift visibile invece che silenzioso.
+      Flow vecchi senza Screen Inventory: non supportati (non conformi -> dm:flows).
+      learning_collegati: validazione dm:research-ui-patterns, .notes/dm-prototype-notes.md.
+  - version: 0.1.0
+    date: 2026-06-05
+    type: initial
+    summary: >
+      Versione iniziale. Atomo-dominio design (categoria prototyping) che materializza
+      un flow in un prototipo HTML navigabile con dati mock. Monofase Drafting, modalità
+      guided/headless, triage manuale a 2 livelli (lightweight loop di validazione / deep
+      deliverable cliente). Output payload non-textual (index.html) + sidecar handoff
+      (index.meta.yaml) con frontmatter canonico, sullo schema di colorize. Consuma il
+      flow (obbligatorio) e il domain-model (opzionale) via catena upstream. Costruito in
+      standalone come banco di prova del loop dm-flows -> dm-prototype, PRIMA di
+      cristallizzare i composti flow-to-prototype/design-to-prototype (cfr. scheda-input,
+      anti-pattern "composti che nascondono pipeline"). Ricerca anti-duplicazione svolta:
+      dm-landing-render e dm-slides generano HTML ma con contratti diversi (brand/design-spec,
+      schema content) e non espongono un atomo di rendering condivisibile; la disciplina
+      HTML semantico/no-build è riusata come reference, non duplicata.

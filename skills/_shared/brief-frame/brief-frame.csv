@@ -1,0 +1,21 @@
+slot_id,cluster,label,evidence_kinds,consumers,req_feature,req_module,req_new_product,req_unknown_market,elicit_lens
+problem,vision-problem,Problema core risolto,pain|claim,brief,no,yes,yes,yes,evidence
+current_alternatives,vision-problem,Come si risolve oggi / alternative in uso,claim|entity,brief,no,yes,yes,yes,counterfactual
+insight_angle,vision-problem,Insight o angolo che rende diverso l'approccio,claim|goal,brief,no,no,yes,yes,attachment
+target_users,users-value,Utenti target (almeno il primario),entity|need,brief|personas,yes,yes,yes,yes,specificity
+user_types,users-value,Tipi di utente distinti con bisogni diversi,entity|claim,personas,no,yes,yes,yes,specificity
+value_prop,users-value,Valore consegnato / proposta,goal|claim,brief,yes,yes,yes,yes,evidence
+context_of_use,users-value,Contesto e momento d'uso (aha moment),claim|quote,personas|journeys,no,no,yes,yes,evidence
+competitors,market-diff,Concorrenti o soluzioni alternative,entity|claim,brief,no,no,yes,yes,counterfactual
+market_context,market-diff,"Contesto di mercato (dimensione, trend)",metric|claim,brief,no,no,no,yes,evidence
+differentiation,market-diff,Differenziazione / moat difendibile,claim|goal,brief,no,no,yes,yes,attachment
+why_now,market-diff,Perché adesso è il momento giusto,claim,brief,no,no,no,yes,attachment
+success_metrics,success-scope,Criteri di successo / metriche,metric|goal,brief,yes,yes,yes,yes,specificity
+mvp_scope,success-scope,Versione minima che crea valore reale,decision|constraint,brief,yes,yes,yes,yes,specificity
+out_of_scope,success-scope,Cosa è esplicitamente fuori scope,decision,brief,no,yes,yes,no,specificity
+constraints,success-scope,"Vincoli (tecnici, normativi, budget, tempo)",constraint,brief,yes,yes,yes,yes,evidence
+vision_long_term,success-scope,Visione a 2-3 anni se ha successo,goal,brief,no,no,yes,yes,attachment
+domain_entities,domain,Entità di dominio nominate,entity,domain-model,no,yes,yes,yes,specificity
+glossary_terms,domain,Termini di dominio / gergo,term,domain-model,no,yes,yes,yes,specificity
+journey_phases,journey,Fasi del percorso / touchpoint,decision|entity,journeys,no,no,yes,yes,evidence
+journey_sentiment,journey,Picchi emotivi (alti/bassi),pain|quote|goal,journeys,no,no,yes,yes,evidence

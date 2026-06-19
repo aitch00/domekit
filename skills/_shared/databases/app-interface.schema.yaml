@@ -1,0 +1,63 @@
+# app-interface.schema.yaml
+# Contratto del database L3 app-interface.csv (pattern/issue UI per app interface).
+# Conforme a 05-principio-database (1.1.0).
+version: 1.0.0
+file: app-interface.csv
+description: >
+  Catalogo di issue/pattern UI per interfacce applicative: per ogni voce, la
+  descrizione del problema, il do/don't, esempi di codice buono/cattivo e la
+  severita'. Lookup per tema via Keywords o Category.
+format:
+  delimiter: ","
+  header: true
+  quoting: minimal
+primary_key: "No"
+consumers:
+  - dm-research-ui-patterns   # lookup pattern per tipo schermata (primo consumatore conforme)
+  - domain-visual             # uso storico (suite dome-design), non ancora dichiarato a manifest
+
+columns:
+  - name: "No"
+    type: integer
+    required: true
+    unique: true
+  - name: "Category"
+    type: string
+    required: true
+    description: "Macro-categoria del pattern/issue (es. Navigation, Forms)."
+  - name: "Issue"
+    type: string
+    required: true
+    description: "Nome sintetico dell'issue/pattern."
+  - name: "Keywords"
+    type: string
+    required: true
+    format: comma-separated-list
+    description: "Keyword per il match sull'intent. Colonna di lookup."
+  - name: "Platform"
+    type: string
+    required: true
+    description: "Piattaforma di pertinenza (Web, Mobile, All...)."
+  - name: "Description"
+    type: string
+    required: true
+  - name: "Do"
+    type: string
+    required: true
+    description: "Comportamento raccomandato, in prosa dichiarativa."
+  - name: "Don't"
+    type: string
+    required: true
+    description: "Anti-pattern corrispondente."
+  - name: "Code Example Good"
+    type: string
+    required: false
+    nullable: true
+  - name: "Code Example Bad"
+    type: string
+    required: false
+    nullable: true
+  - name: "Severity"
+    type: enum
+    values: [Critical, High, Medium, Low]
+    required: true

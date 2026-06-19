@@ -1,0 +1,53 @@
+# ui-reasoning.schema.yaml
+# Contratto del database L3 ui-reasoning.csv (reasoning di pattern per categoria UI).
+# Conforme a 05-principio-database (1.1.0).
+version: 1.0.0
+file: ui-reasoning.csv
+description: >
+  Reasoning di design per categoria di UI/product type: pattern raccomandato,
+  priorita' di stile, mood di colore/tipografia, effetti chiave, regole di
+  decisione e anti-pattern, con severita'. Lookup via UI_Category.
+format:
+  delimiter: ","
+  header: true
+  quoting: minimal
+primary_key: "No"
+consumers:
+  - dm-research-ui-patterns   # lookup reasoning per tipo schermata (primo consumatore conforme)
+  - dome-design (L4)          # uso storico via design-for-product-type, non ancora dichiarato a manifest
+
+columns:
+  - name: "No"
+    type: integer
+    required: true
+    unique: true
+  - name: "UI_Category"
+    type: string
+    required: true
+    description: "Categoria UI / product type. Colonna di lookup."
+  - name: "Recommended_Pattern"
+    type: string
+    required: true
+  - name: "Style_Priority"
+    type: string
+    required: true
+  - name: "Color_Mood"
+    type: string
+    required: true
+  - name: "Typography_Mood"
+    type: string
+    required: true
+  - name: "Key_Effects"
+    type: string
+    required: true
+  - name: "Decision_Rules"
+    type: string
+    required: true
+    description: "Fatti dichiarativi di decisione, in prosa (niente formule: anti-pattern del principio)."
+  - name: "Anti_Patterns"
+    type: string
+    required: true
+  - name: "Severity"
+    type: enum
+    values: [HIGH, MEDIUM]
+    required: true

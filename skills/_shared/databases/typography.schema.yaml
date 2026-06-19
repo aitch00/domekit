@@ -1,0 +1,52 @@
+# typography.schema.yaml
+# Contratto del database L3 typography.csv. Conforme a 05-principio-database (1.1.0).
+version: 1.0.0
+file: typography.csv
+description: >
+  Circa 70 font pairing (heading + body) con mood keywords, best-for e import Google Fonts. Lookup per Font Pairing Name o cross-match sui Mood/Style Keywords dello stile scelto.
+format:
+  delimiter: ","
+  header: true
+  quoting: minimal
+primary_key: "Font Pairing Name"
+consumers:
+  - dm-ui-styles             # produttore design-context (cross-match mood, C2)
+  - typeset (L1)             # uso storico suite dome-design, non a manifest
+  - apply-style-name (L4)    # uso storico, non a manifest
+columns:
+  - name: "No"
+    type: integer
+    required: true
+    unique: true
+  - name: "Font Pairing Name"
+    type: string
+    required: true
+    unique: true
+  - name: "Category"
+    type: string
+    required: true
+  - name: "Heading Font"
+    type: string
+    required: true
+  - name: "Body Font"
+    type: string
+    required: true
+  - name: "Mood/Style Keywords"
+    type: string
+    required: true
+    format: comma-separated-list
+  - name: "Best For"
+    type: string
+    required: true
+  - name: "Google Fonts URL"
+    type: string
+    required: true
+  - name: "CSS Import"
+    type: string
+    required: true
+  - name: "Tailwind Config"
+    type: string
+    required: true
+  - name: "Notes"
+    type: string
+    required: true

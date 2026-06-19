@@ -1,0 +1,81 @@
+# landing.schema.yaml
+# Contratto del database L3 landing.csv (pattern di landing page).
+# Conforme a 05-principio-database. Le skill consumatrici dichiarano min_version
+# in `consumes_databases` e in pre-check abortiscono se lo schema disponibile e' inferiore.
+version: 1.0.0
+file: landing.csv
+description: >
+  Catalogo di pattern di landing page: struttura delle sezioni, posizionamento
+  della CTA primaria, strategia di colore, effetti consigliati e note di
+  conversion optimization. Lookup per intent via la colonna Keywords.
+format:
+  delimiter: ","
+  header: true
+  quoting: minimal           # i campi con virgole sono racchiusi tra doppi apici
+primary_key: "Pattern Name"
+consumers:
+  - dm-content               # selezione pattern in fase di contenuto
+  - dm-landing-design        # selezione pattern + struttura (Stage 2)
+  - dm-research-ui-patterns  # lookup per schermate di tipo landing (2026-06-10)
+
+columns:
+  - name: "No"
+    type: integer
+    required: true
+    unique: true
+    min: 1
+    description: "Indice progressivo 1..N. Sequenziale, non semanticamente significativo."
+
+  - name: "Pattern Name"
+    type: string
+    required: true
+    unique: true
+    description: "Nome del pattern (chiave primaria semantica). Es. 'Hero + Features + CTA'."
+
+  - name: "Keywords"
+    type: string
+    required: true
+    format: comma-separated-list
+    description: >
+      Lista di keyword separate da virgola usata per il match sull'intent della
+      landing (es. 'hero, features, cta, social-proof'). E' la colonna su cui le
+      skill consumatrici fanno il lookup deterministico.
+
+  - name: "Section Order"
+    type: string
+    required: true
+    description: >
+      Sequenza canonica delle sezioni, in prosa numerata (es. '1. Hero, 2. Value
+      prop, 3. Features, ...'). Guida, non vincolo: il contenuto reale puo'
+      aggiungere/omettere sezioni.
+
+  - name: "Primary CTA Placement"
+    type: string
+    required: true
+    description: "Dove collocare la CTA primaria (es. 'Hero (sticky) + Bottom')."
+
+  - name: "Color Strategy"
+    type: string
+    required: true
+    description: >
+      Indicazione di strategia colore per sezione, in prosa. Dichiarativa: la
+      decisione finale di palette resta a colorize / Stage 3 del design.
+
+  - name: "Recommended Effects"
+    type: string
+    required: true
+    description: >
+      Effetti e motion consigliati, in prosa (es. 'Hero parallax, card hover
+      lift'). Soggetti al budget di profondita' e ai vincoli di motion a11y in
+      fase di design/render.
+
+  - name: "Conversion Optimization"
+    type: string
+    required: true
+    description: "Note di ottimizzazione della conversione, in prosa."
+
+# Note:
+# - Tutte le colonne testuali sono free-text descrittivo: nessun enum a cardinalita' chiusa.
+#   Eventuali colonne enum future (es. una 'Tier' o 'Category') andrebbero dichiarate con `values`.
+# - Le colonne in prosa NON contengono logica di business (anti-pattern del principio): sono fatti
+#   dichiarativi che le skill interpretano.

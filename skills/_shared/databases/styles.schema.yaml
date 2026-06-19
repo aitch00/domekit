@@ -1,0 +1,85 @@
+# styles.schema.yaml
+# Contratto del database L3 styles.csv. Conforme a 05-principio-database (1.1.0).
+version: 1.0.0
+file: styles.csv
+description: >
+  Catalogo di 84 stili UI: keywords, palette indicativa, effetti, best-for/do-not-use, compatibilita' light/dark, note di performance/accessibilita', checklist di implementazione e variabili di design system. Lookup per nome (Style Category) o Keywords.
+format:
+  delimiter: ","
+  header: true
+  quoting: minimal
+primary_key: "Style Category"
+consumers:
+  - dm-ui-styles             # produttore design-context (lookup per stile, C2)
+  - apply-style-name (L4)    # uso storico suite dome-design, non a manifest
+  - style-match (L1)         # uso storico, non a manifest
+columns:
+  - name: "No"
+    type: integer
+    required: true
+    unique: true
+  - name: "Style Category"
+    type: string
+    required: true
+    unique: true
+  - name: "Type"
+    type: string
+    required: true
+  - name: "Keywords"
+    type: string
+    required: true
+    format: comma-separated-list
+  - name: "Primary Colors"
+    type: string
+    required: true
+  - name: "Secondary Colors"
+    type: string
+    required: true
+  - name: "Effects & Animation"
+    type: string
+    required: true
+  - name: "Best For"
+    type: string
+    required: true
+  - name: "Do Not Use For"
+    type: string
+    required: true
+  - name: "Light Mode ✓"
+    type: string
+    required: true
+  - name: "Dark Mode ✓"
+    type: string
+    required: true
+  - name: "Performance"
+    type: string
+    required: true
+  - name: "Accessibility"
+    type: string
+    required: true
+  - name: "Mobile-Friendly"
+    type: string
+    required: true
+  - name: "Conversion-Focused"
+    type: string
+    required: true
+  - name: "Framework Compatibility"
+    type: string
+    required: true
+  - name: "Era/Origin"
+    type: string
+    required: true
+  - name: "Complexity"
+    type: string
+    required: true
+  - name: "AI Prompt Keywords"
+    type: string
+    required: true
+  - name: "CSS/Technical Keywords"
+    type: string
+    required: true
+  - name: "Implementation Checklist"
+    type: string
+    required: true
+  - name: "Design System Variables"
+    type: string
+    required: true

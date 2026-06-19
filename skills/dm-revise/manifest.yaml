@@ -1,0 +1,96 @@
+skill: dm-revise
+version: 0.1.3
+type: atom-dominio
+domain: design          # verticale: design/UX research (collocata in .claude/skills come comando dm-*)
+category: ux-research   # round-trip: lato produttore dell'edit→flow
+
+implements:
+  - principle: 03-principio-atomi
+    version: 1.1.0
+    status: in-sync
+  - principle: 02-principio-handoff
+    version: 1.1.0
+    status: in-sync
+
+modes:
+  - guided
+  - yolo
+  - headless
+
+io_schema:
+  input:
+    - field: prototype
+      type: path         # il prototipo HTML da rivedere (prodotto da dm:prototype)
+      required: false
+    - field: target_flow
+      type: path         # il flow-*.md di provenienza; dedotto dal meta del prototipo o --flow
+      required: false
+  output:
+    - artifact: changeset
+      format: markdown
+      schema: handoff-v1
+      conforms_to: ../_shared/dm-design/changeset-contract.md@1.1.0   # delta di contratto, anchor sc./s.; source: edit
+
+consumes_databases: []
+
+consumes_contracts:
+  - contract: ../_shared/dm-design/changeset-contract.md
+    schema_version: ">=1.1.0"     # produce-conforme: lo schema del changeset esportato (source: edit)
+  - contract: ../_shared/dm-design/flow-handoff-contract.md
+    schema_version: ">=1.0.0"     # legge il flow per la mappa anchor (sc.<slug>/s.<slug>)
+
+dispatches_agents: []
+
+handoff:
+  enabled: true
+  upstream:
+    - dm:prototype     # rivede il prototipo che dm:prototype ha materializzato dal flow
+  downstream:
+    - dm:flows         # chiude chiamando dm:flows --ingest (assorbe il changeset nel target_flow)
+
+harvest_policy:
+  domain: opt-in
+  solution: opt-in
+  method: opt-in
+
+status: in-sync
+evolution_log:
+  - version: 0.1.3
+    date: 2026-06-16
+    type: patch
+    summary: >
+      Convergenza con dm:validate definita (changeset-contract@1.1.0): dm:revise popola
+      source: edit nel frontmatter del changeset, marcando la provenienza ("edit deliberato",
+      non ipotesi da validazione). Prepara il terreno a dm:validate come secondo produttore
+      (revisioni-flow da sessioni utente, source: validation + evidence/confidence) verso lo
+      stesso ricevitore dm:flows ingest — implementazione differita a quando si tocca il suo
+      ingest. conforms_to/consumes_contracts → 1.1.0. Solo additivo.
+  - version: 0.1.2
+    date: 2026-06-16
+    type: patch
+    summary: >
+      Due robustezze emerse dal banco di prova §10. (1) Risoluzione del target_flow in cascata:
+      --flow > meta se risolve su disco > ricerca per-basename sotto l'albero progetto (gestisce i
+      repo rilocati dove il meta porta il path canonico docs/dome/flows/... inesistente) > chiedi.
+      (2) Gestione degli edit ambigui nel filtro decisione-vs-ritocco: guided chiede guidando con
+      l'ipotesi; yolo/headless scompone (logga solo la parte-contratto) e, se indecidibile, tratta
+      come ritocco ma lo SEGNALA nel report invece di perderlo in silenzio. Solo wording.
+  - version: 0.1.1
+    date: 2026-06-16
+    type: patch
+    summary: >
+      Gate di conformità del flow al passo 1: se il target_flow è legacy pre-contratto (nessuna
+      mappa anchor) ferma con rimedio invece di degradare gli edit sugli id dell'HTML. Emerso dal
+      banco di prova §10 su test/aletti-cc. Simmetrico al gate aggiunto in dm:flows ingest.
+  - version: 0.1.0
+    date: 2026-06-15
+    type: initial
+    summary: >
+      Prima versione. Atom-dominio produttore del round-trip edit→flow (deliverable A di
+      .notes/analysis/edit-to-flow-process-spec.md). Sessione di edit guidata sul prototipo con
+      log live degli edit ancorati a sc.<slug>/s.<slug>, filtro decisione-vs-ritocco (solo i delta
+      di contratto entrano), export di un changeset-*.md conforme a changeset-contract@1.0.0, e
+      chiusura via handoff a dm:flows --ingest (il proprietario del flow, deliverable B). HTML
+      transitorio, flow durevole. Riclassificata in fase architect da composite (α) a atom-dominio
+      + handoff (β): il decision tree del metodo segnala che un "composite" a 1-atomo orchestrato
+      sarebbe un wrapper / "composto che nasconde pipeline". Non scrive mai il flow direttamente.

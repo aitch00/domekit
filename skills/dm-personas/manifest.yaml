@@ -1,0 +1,134 @@
+skill: dm-personas
+version: 0.6.1
+type: atom-dominio
+domain: design          # verticale: design/UX research (collocata in .claude/skills come comando dm-*)
+category: ux-research
+
+implements:
+  - principle: 03-principio-atomi
+    version: 1.1.0
+    status: in-sync
+  - principle: 02-principio-handoff
+    version: 1.1.0
+    status: in-sync
+
+modes:
+  - guided
+  - yolo
+  - headless
+
+io_schema:
+  input:
+    - field: shared_content
+      type: list[path]   # docs/dome/product-brief, brainstorming, journeys, PRD, discovery
+      required: false
+    - field: persona_hint
+      type: string
+      required: false
+  output:
+    - artifact: persona
+      format: markdown
+      schema: handoff-v1   # frontmatter con upstream + weak_sections
+    - artifact: personas-overview
+      format: markdown
+      schema: handoff-v1
+
+consumes_databases: []
+
+consumes_references:
+  - references/persona-template.md   # scheletro di output (single + overview)
+  - references/cognitive-dimensions.md
+  - references/cognitive-biases.md
+
+handoff:
+  enabled: true
+  downstream:
+    - dm:journeys
+    - dm:flows
+
+research_policy:
+  intents: [corpus]
+  trigger: gap-driven            # corpus come grounding del discovery; 3 stadi (esplicito/default/gap-driven)
+
+consumes_contracts:
+  - contract: ../_shared/dm-research/research-digest-schema.md
+    schema_version: ">=0.1.0"    # consuma il digest corpus di dm:research-corpus
+
+harvest_policy:
+  domain: opt-in
+  solution: opt-in
+  method: auto-on-finalize   # emette [[harvest:finalize skill=dm-personas]]: il trigger engine propone dome:harvest --method a fine skill
+
+status: in-sync
+evolution_log:
+  - version: 0.6.1
+    date: 2026-06-19
+    type: patch
+    summary: >
+      Fix discrepanza di status (feedback utente): la persona singola nel template
+      nasceva con status: draft hardcoded e nessuno step di finalize la ribaltava a
+      complete — restava draft per sempre a processo concluso. Ora nasce complete (gate =
+      self-check di Step F), coerente con l'overview (già complete) e con corpus-index;
+      draft resta ammesso solo come stato deliberato (gap critici in weak_sections),
+      dichiarato nel report. persona-template.md, Step G e Regole aggiornati.
+  - version: 0.6.0
+    date: 2026-06-13
+    type: minor
+    summary: >
+      Gap CORE chiusi dopo validazione canonica via dm:research-practices: aggiunto
+      campo Motivations (il "perché", distinto dai goal — load-bearing nelle fonti
+      NN/g/Cooper) e nota di grounding dell'evidenza (campi non ancorati a fonte, in
+      primis Cognitive Profile e Key Biases, vanno in weak_sections — anti-pattern
+      "persona da assunzioni"). learning_collegati: validazione dm:research-practices.
+  - version: 0.5.0
+    date: 2026-06-13
+    type: minor
+    summary: >
+      Template di output estratto nelle references (references/persona-template.md,
+      single + overview): il corpo della SKILL ora linka lo scheletro invece di
+      inlinarlo (nota test 11-06 "il template va messo nelle referenze"). Validato
+      via ricerca UX (Cooper goal-directed + NN/g): aggiunti 3 campi canonici al
+      Profile (device/canale, frequenza d'uso, tech savviness) e resa esplicita la
+      regola di derivazione del radar + mappatura severity->numero (low=2/med=5/high=8)
+      per rigenerazione deterministica. consumes_references popolato.
+      learning_collegati: .notes/test/11-06-test-aletti-cc.md.
+  - version: 0.4.0
+    date: 2026-06-10
+    type: minor
+    summary: >
+      Merge delle due linee parallele (riconciliazione corpus-index). Da main
+      (U2): conformita' al contratto handoff 02-principio-handoff@1.1.0 —
+      frontmatter con role (single|overview), id e anchor di elemento,
+      rigenerazione anchor-preserving. Dalla linea ricerca (B5/C3): grounding
+      del discovery via dm:research-corpus (research_policy intent corpus +
+      consumes_contracts research-digest; degradazione a scansione diretta) e
+      03-principio-atomi@1.1.0 (esenzione grounding di servizio). Le due 0.3.0
+      parallele convergono qui. implements: 03@1.1.0 + 02@1.1.0.
+  - version: 0.3.0
+    date: 2026-06-09
+    type: minor
+    summary: >
+      Conformità al contratto handoff (02-principio-handoff@1.1.0): frontmatter di
+      output con produced_by/produced_at/principle_versions/type/process/upstream,
+      role (single|overview) e id. Anchor: colonna id sui bias (bias.), {#finding.}
+      sui finding dell'overview. Rigenerazione anchor-preserving. Parte di U2 del
+      piano dm:blueprint v0.3.
+  - version: 0.2.0
+    date: 2026-06-05
+    type: minor
+    summary: >
+      Refactor della modalità di interazione verso il dome-method. Asse unico
+      guided/yolo/headless (rimossi facilitation level beginner/intermediate/expert
+      e il dualismo AI/manual). Percorso primario "deduci dal contenuto condiviso ->
+      verifica/correggi" al posto del blocco di domande fisse: Discovery assorbe
+      brief/brainstorm/journeys/PRD, deduce la bozza persona e dichiara i gap.
+      Aggiunto self-check di coerenza e handoff con upstream + weak_sections.
+  - version: 0.1.0
+    date: 2026-06-05
+    type: initial
+    summary: >
+      Prima versione manifestata. Atomo-dominio di design-research derivato dal
+      processo meepo-plugin (cognitive-profiling) e allineato al dome-method v2:
+      aggiunto manifest L4, output spostato sotto docs/dome/personas/, next-step
+      corretti. Il know-how cognitivo (4 dimensioni, bias, radar) resta nelle
+      references; nessuna dipendenza dal plugin meepo.
