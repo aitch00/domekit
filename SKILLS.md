@@ -1,10 +1,9 @@
 # Domekit — indice delle skill
 
-_7 skill. Generato da `tools/build-dome-method.py`._
+_6 skill. Generato da `tools/build-dome-method.py`._
 
 | Skill | Descrizione |
 |---|---|
-| `corpus-index` | Indicizza un'intera cartella di handoff-artifact (brief, personas, journeys, flows, domain-model, …) in un corpus-index: la lista di tutti gli elementi consumabili con anchor-ID stabili, più menzioni grezze di schermata, delta e segnale di staleness sui re-run. Atomo universale (non solo design). Scan ibrido per type/role, indicizzazione a grana fine, stamp dei doc legacy, riconciliazione LLM come rete di sicurezza. Usa prima di sintetizzare un corpus (dm:blueprint) o quando aggiungi un documento e vuoi sapere cosa è cambiato. |
 | `dm:domain-modeler` | Modella il dominio applicativo producendo un entity-relationship model con Mermaid erDiagram. Deduce le entità dai contenuti condivisi (brief, brainstorm, flows, glossario) e le fa verificare a gate. Usa pre-sviluppo per allineare design e sviluppo sul vocabolario condiviso. |
 | `dm:flows` | Documenta user flow con diagramma Mermaid e analisi cognitiva automatica (Hick's Law, Miller 7±2, context switching). Deduce l'happy path dai contenuti condivisi (journeys, personas, domain-model, brief) e lo fa verificare. Usa per mappare come gli utenti usano il prodotto. |
 | `dm:journeys` | Mappa customer journey con analisi Peak-End (Kahneman) e Sentiment Timeline. Deduce le fasi dai contenuti condivisi (personas, brief, flows) e le fa verificare. Usa dopo aver definito le personas per mappare l'esperienza vissuta dagli utenti. |
