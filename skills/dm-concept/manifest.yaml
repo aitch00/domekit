@@ -1,0 +1,86 @@
+skill: dm-concept
+version: 0.1.0
+type: atom-dominio
+domain: design          # verticale: design/UX research (collocata in .claude/skills come comando dm-*)
+category: ideation
+
+implements:
+  - principle: 03-principio-atomi
+    version: 1.1.0
+    status: in-sync
+  - principle: 02-principio-handoff
+    version: 1.1.0
+    status: in-sync
+
+modes:
+  - guided
+  - yolo
+  - headless
+
+io_schema:
+  input:
+    - field: ideation_cards
+      type: path          # output di dm:ideation (upstream primario)
+      required: false
+    - field: selection_criteria
+      type: list[string]  # criteri espliciti; in fallback dedotti dal brief
+      required: false
+    - field: n_concepts
+      type: int
+      required: false
+      default: "2-3"
+    - field: shared_content
+      type: list[path]    # brief/PRD (criteri), personas, journeys
+      required: false
+  output:
+    - artifact: concept
+      format: markdown
+      schema: handoff-v1   # un file per concept; frontmatter con upstream + weak_sections
+    - artifact: concept-selection
+      format: markdown
+      schema: handoff-v1   # decisione documentata: matrice + selezione + da-salvare + decisioni aperte
+
+consumes_databases: []
+
+consumes_references:
+  - references/concept-rules.md      # regole load-bearing (concept≠flow≠PRD, 2 criteri inviolabili, multipli)
+  - references/concept-template.md   # scheletro di output (concept + selection)
+
+handoff:
+  enabled: true
+  downstream:
+    - dm:flows
+    - dm:spec
+
+research_policy:
+  intents: [corpus]
+  trigger: gap-driven            # corpus come grounding del discovery; 3 stadi (esplicito/default/gap-driven)
+
+consumes_contracts:
+  - contract: ../dome-shared/dm-research/research-digest-schema.md
+    schema_version: ">=0.1.0"    # consuma il digest corpus di dm:research-corpus
+
+harvest_policy:
+  domain: opt-in
+  solution: opt-in
+  method: auto-on-finalize   # emette [[harvest:finalize skill=dm-concept]]: il trigger engine propone dome:harvest --method a fine skill
+
+status: in-sync
+evolution_log:
+  - version: 0.1.0
+    date: 2026-06-23
+    type: initial
+    summary: >
+      Prima versione manifestata. Atomo-dominio di design-research per la
+      convergenza della Fase 3 (gap docs/analysis/pipeline-gaps/03-ideation-concept.md,
+      sezione dm-concept). Converge le idea cards di dm:ideation in 2-3 concept di
+      prodotto alternativi (nome+tagline, core interaction model, assunzioni critiche,
+      trade-off, sketch testuale, rischi) e seleziona con matrice criteri × concept in
+      concept-selection.md. Regole load-bearing in references/concept-rules.md: concept
+      ≠ flow ≠ PRD (altitudine), due criteri inviolabili di selezione (mapping su
+      journey + assunzione rischiosa testabile), concept multipli come protezione dalla
+      "prima idea per inerzia"; la valutazione è concentrata nella sola selection.
+      Allineato al modello dm:journeys/dm:flows: deduci → presenta → verifica, modalità
+      guided/yolo/headless, grounding corpus via dm:research-corpus (degrada a scansione
+      diretta). Upstream dm:ideation; handoff downstream dm:flows e dm:spec. Output in
+      docs/design/concepts/.

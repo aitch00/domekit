@@ -6,7 +6,7 @@ argument-hint: "[persona-hint] [--yolo] [--autonomous / mode:headless]"
 
 # dm:personas
 
-Produce `docs/dome/personas/` con un file per ogni persona e un `personas-overview.md`.
+Produce `docs/design/personas/` con un file per ogni persona e un `YYYY-MM-DD-personas-overview-01.md`.
 
 La modalità di default **non interroga**: assorbe il contenuto condiviso del progetto, **deduce una bozza di persona**, e la fa **verificare/correggere**. Le domande coprono solo i gap reali.
 
@@ -16,7 +16,7 @@ La modalità di default **non interroga**: assorbe il contenuto condiviso del pr
 
 ### 1. Resume Check
 
-Scansiona `docs/dome/personas/persona-*.md`.
+Scansiona `docs/design/personas/*-persona-*.md`.
 
 Se trovati, lista le personas esistenti (nome + tipo + `status`) e chiedi:
 
@@ -50,9 +50,9 @@ sotto (mai bloccare). I finding del digest entrano nella bozza solo dove la
 plasmano (load-bearing).
 
 **Scansiona il contenuto condiviso** (via digest o diretta in fallback, in ordine di valore):
-- `docs/dome/product-brief/*.md` — utenti target, valore, mercato
-- `docs/dome/brainstorming/*.md` — ipotesi utente emerse
-- `docs/dome/journeys/journey-*.md` — profili già in uso a valle
+- `docs/design/product-brief/*.md` — utenti target, valore, mercato
+- `docs/design/brainstorming/*.md` — ipotesi utente emerse
+- `docs/design/journeys/*-journey-*.md` — profili già in uso a valle
 - `PRD*.md`, `discovery/*.md`, `*brief*.md` — fonti legacy
 
 **Triage** (dimensiona lo sforzo): `lightweight` (0-1 fonti), `standard` (2-5), `deep` (6+).
@@ -146,9 +146,9 @@ Se rilevi un'incoerenza, annotala in `weak_sections` (non bloccare).
 
 ### G. Scrivi File
 
-Crea `docs/dome/personas/` se non esiste.
+Crea `docs/design/personas/` se non esiste.
 
-Scrivi `docs/dome/personas/persona-[type]-[name-slug].md` seguendo lo scheletro
+Scrivi `docs/design/personas/YYYY-MM-DD-persona-[type]-[name-slug]-01.md` seguendo lo scheletro
 `role: single` di [`references/persona-template.md`](./references/persona-template.md)
 (frontmatter handoff + Profile + Cognitive Profile + Key Biases con anchor `bias.<slug>`
 + Radar Chart Data).
@@ -172,7 +172,7 @@ AskUserQuestion (header: "Prossima persona"):
 
 ## Overview
 
-Dopo l'ultimo "ho finito", aggiorna `docs/dome/personas/personas-overview.md`
+Dopo l'ultimo "ho finito", aggiorna `docs/design/personas/YYYY-MM-DD-personas-overview-01.md`
 seguendo lo scheletro `role: overview` di
 [`references/persona-template.md`](./references/persona-template.md).
 
@@ -184,8 +184,8 @@ seguendo lo scheletro `role: overview` di
 dm:personas completato.
 
 Output:
-  docs/dome/personas/personas-overview.md
-  docs/dome/personas/persona-*.md ([N] file)
+  docs/design/personas/YYYY-MM-DD-personas-overview-01.md
+  docs/design/personas/*-persona-*.md ([N] file)
 
 Next steps:
   /dm-journeys   — mappa l'esperienza vissuta (usa le personas come input)

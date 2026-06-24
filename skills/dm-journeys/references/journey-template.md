@@ -17,7 +17,7 @@ di titolo invece di rislugare (mai rinumerare).
 
 ## 1 · Journey (role: single)
 
-File: `docs/dome/journeys/journey-[scenario-slug]-[persona-slug].md`
+File: `docs/design/journeys/YYYY-MM-DD-journey-[scenario-slug]-[persona-slug]-01.md`
 
 ```markdown
 ---
@@ -93,7 +93,7 @@ interno (chi è responsabile di chiudere l'opportunità — Zona C di NN/g; "—
 
 ## 2 · Journeys Overview (role: overview)
 
-File: `docs/dome/journeys/journeys-overview.md`
+File: `docs/design/journeys/YYYY-MM-DD-journeys-overview-01.md`
 
 ```markdown
 ---
@@ -131,5 +131,5 @@ Ogni finding ricorrente porta un anchor `### Titolo {#finding.<slug>}` (stabile)
 
 | Journey | File |
 |---------|------|
-| [scenario] ([persona]) | `docs/dome/journeys/journey-[slug]-[slug].md` |
+| [scenario] ([persona]) | `docs/design/journeys/YYYY-MM-DD-journey-[slug]-[slug]-01.md` |
 ```

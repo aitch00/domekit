@@ -20,7 +20,7 @@ modes:
 io_schema:
   input:
     - field: shared_content
-      type: list[path]   # docs/dome/product-brief, brainstorming, journeys, PRD, discovery
+      type: list[path]   # docs/design/product-brief, brainstorming, journeys, PRD, discovery
       required: false
     - field: persona_hint
       type: string
@@ -129,6 +129,6 @@ evolution_log:
     summary: >
       Prima versione manifestata. Atomo-dominio di design-research derivato dal
       processo meepo-plugin (cognitive-profiling) e allineato al dome-method v2:
-      aggiunto manifest L4, output spostato sotto docs/dome/personas/, next-step
+      aggiunto manifest L4, output spostato sotto docs/design/personas/, next-step
       corretti. Il know-how cognitivo (4 dimensioni, bias, radar) resta nelle
       references; nessuna dipendenza dal plugin meepo.

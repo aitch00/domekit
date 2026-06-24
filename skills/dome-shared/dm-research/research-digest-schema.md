@@ -53,7 +53,7 @@ Ogni affermazione del digest è un finding con **basis etichettata**:
 
 ```yaml
 - claim: "Il flow checkout referenzia la persona 'Marta', assente da personas-overview."
-  basis: "direct: docs/dome/flows/flow-checkout.md:18 vs docs/dome/personas/personas-overview.md"
+  basis: "direct: docs/design/flows/flow-checkout.md:18 vs docs/design/personas/YYYY-MM-DD-personas-overview-01.md"
   confidence: high               # high ≥0.80 | medium 0.60–0.79 | low <0.60
   section: contraddizioni        # sezione del digest a cui appartiene
 ```
@@ -73,12 +73,12 @@ Un claim senza basis è **rifiutato**: la ricerca produce fatti tracciati, non i
 
 | Intent | Atomo | Fonte | Sezioni del digest |
 |--------|-------|-------|--------------------|
-| `corpus` | `dm:research-corpus` | interna (`docs/dome/`) | Inventario · Stato pipeline · Gap · Contraddizioni · Puntatori |
+| `corpus` | `dm:research-corpus` | interna (`docs/design/`) | Inventario · Stato pipeline · Gap · Contraddizioni · Puntatori |
 | `market` | `dm:research-market` | web | Landscape (per player: nome, approccio, gap) · Market Context · User Sentiment · Timing & Opportunity · Risks · *deep only:* Mappa dei player (segmenti + posizionamento per assi) |
 | `domain` | `dm:research-domain` | web | Vocabolario (termini+definizioni) · Convenzioni · Attori · Regole/vincoli |
 | `visual-trends` | `dm:research-visual-trends` | web + CSV (styles) | Linguaggio visivo del settore · Reference (chi e come) · Tendenze · Anti-pattern estetici |
 | `evidence` | `dm:research-evidence` | web | Comportamenti documentati · Pain points · Aspettative · Limiti dell'evidenza — *secondaria: non sostituisce dm:validate (primaria)* |
-| `learnings` | `dm:research-learnings` | interna (docs/knowledge + docs/solutions + docs/method-learnings) | Learnings pertinenti · Soluzioni applicabili · Avvisi di metodo |
+| `learnings` | `dm:research-learnings` | interna (docs/harvest/knowledge + docs/harvest/solutions + docs/harvest/method-learnings) | Learnings pertinenti · Soluzioni applicabili · Avvisi di metodo |
 | `practices` | `dm:research-practices` | web | Stato dell'arte · Pattern raccomandati (con quando-usarli) · Pitfalls · Trade-off |
 | `ui-patterns` | `dm:research-ui-patterns` | web + CSV interni | Pattern per schermata · Esempi (chi lo fa e come) · Convenzioni di dominio · Anti-pattern |
 
@@ -114,7 +114,7 @@ Prima di eseguire, l'atomo cerca un digest esistente con stessa `research_key` e
   finestra l'atomo segnala l'età e propone il refresh, non impone il riuso.
 
 In entrambi i casi il riuso annota `reused_from` e "(riuso da [data])"; `--re-research`
-forza sempre l'esecuzione. I digest persistono in `docs/dome/research/<intent>/`.
+forza sempre l'esecuzione. I digest persistono in `docs/design/research/<intent>/`.
 
 ## Anti-injection e degradazione
 

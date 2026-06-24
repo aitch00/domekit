@@ -2,7 +2,7 @@
 
 Reference **condivisa** fra il produttore (`dm:flows`) e i consumatori del flow
 (`dm:prototype` oggi; `dm:blueprint` — sezione A5/A6 — domani). Definisce **una sola
-cosa**: quali sezioni e campi un `flow-*.md` deve esporre perché un consumatore lo
+cosa**: quali sezioni e campi un `*-flow-*.md` deve esporre perché un consumatore lo
 materializzi *senza inventare*. È il perno che disaccoppia produttore e consumatore:
 se il flow cambia forma, si bumpa **qui**, e il drift diventa visibile via `schema_version`
 invece che silenzioso.

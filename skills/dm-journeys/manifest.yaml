@@ -26,7 +26,7 @@ io_schema:
       type: path
       required: false
     - field: shared_content
-      type: list[path]   # docs/dome/flows, product-brief, brainstorming, PRD
+      type: list[path]   # docs/design/flows, product-brief, brainstorming, PRD
       required: false
   output:
     - artifact: journey
@@ -127,7 +127,7 @@ evolution_log:
     summary: >
       Prima versione manifestata. Atomo-dominio di design-research derivato dal
       processo meepo-plugin (behavioral-ux / peak-end) e allineato al dome-method
-      v2: aggiunto manifest L4, output spostato sotto docs/dome/journeys/, lookup
-      personas aggiornato a docs/dome/personas/. L'analisi Peak-End (Kahneman), la
+      v2: aggiunto manifest L4, output spostato sotto docs/design/journeys/, lookup
+      personas aggiornato a docs/design/personas/. L'analisi Peak-End (Kahneman), la
       scala emozioni -2/+3 e la Sentiment Timeline restano nelle references;
       nessuna dipendenza dal plugin meepo.

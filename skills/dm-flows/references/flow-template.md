@@ -18,7 +18,7 @@ di titolo invece di rislugare (mai rinumerare).
 
 ## 1 · Flow (role: single)
 
-File: `docs/dome/flows/flow-[feature-slug].md`
+File: `docs/design/flows/YYYY-MM-DD-flow-[feature-slug]-01.md`
 
 ```markdown
 ---
@@ -120,7 +120,7 @@ Miller 7±2, context switching — vedi references/cognitive-analysis.md]
 
 ## 2 · Flows Overview (role: overview)
 
-File: `docs/dome/flows/flows-overview.md`
+File: `docs/design/flows/YYYY-MM-DD-flows-overview-01.md`
 
 ```markdown
 ---
@@ -153,5 +153,5 @@ finding è un heading `### Titolo {#finding.<slug>}` (anchor stabile).
 
 | Flow | File |
 |------|------|
-| [nome] | `docs/dome/flows/flow-[slug].md` |
+| [nome] | `docs/design/flows/YYYY-MM-DD-flow-[slug]-01.md` |
 ```

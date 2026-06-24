@@ -1,0 +1,79 @@
+skill: dm-ideation
+version: 0.1.0
+type: atom-dominio
+domain: design          # verticale: design/UX research (collocata in .claude/skills come comando dm-*)
+category: ideation
+
+implements:
+  - principle: 03-principio-atomi
+    version: 1.1.0
+    status: in-sync
+  - principle: 02-principio-handoff
+    version: 1.1.0
+    status: in-sync
+
+modes:
+  - guided
+  - yolo
+  - headless
+
+io_schema:
+  input:
+    - field: focus_area
+      type: string
+      required: false
+    - field: n_ideas_per_area
+      type: int
+      required: false
+      default: "3-5"
+    - field: shared_content
+      type: list[path]   # docs/design/journeys (primaria), personas, product-brief/PRD
+      required: false
+  output:
+    - artifact: ideation-cards
+      format: markdown
+      schema: handoff-v1   # frontmatter con upstream + weak_sections; un file per progetto
+
+consumes_databases: []
+
+consumes_references:
+  - references/ideation-patterns.md   # i 10 pattern di divergenza
+  - references/divergence-rules.md    # regole load-bearing (divergenza/convergenza, HMW gate, diversità)
+  - references/ideation-template.md   # scheletro di output
+
+handoff:
+  enabled: true
+  downstream:
+    - dm:concept
+
+research_policy:
+  intents: [corpus]
+  trigger: gap-driven            # corpus come grounding del discovery; 3 stadi (esplicito/default/gap-driven)
+
+consumes_contracts:
+  - contract: ../dome-shared/dm-research/research-digest-schema.md
+    schema_version: ">=0.1.0"    # consuma il digest corpus di dm:research-corpus
+
+harvest_policy:
+  domain: opt-in
+  solution: opt-in
+  method: auto-on-finalize   # emette [[harvest:finalize skill=dm-ideation]]: il trigger engine propone dome:harvest --method a fine skill
+
+status: in-sync
+evolution_log:
+  - version: 0.1.0
+    date: 2026-06-23
+    type: initial
+    summary: >
+      Prima versione manifestata. Atomo-dominio di design-research per la fase di
+      ideazione (gap "Fase 3 — Ideazione e concept" del pipeline,
+      docs/analysis/pipeline-gaps/03-ideation-concept.md). Genera soluzioni
+      alternative divergenti dai pain point/opportunità delle journey lungo 10
+      pattern di design (references/ideation-patterns.md), con HMW come gate a
+      monte. Regole load-bearing in references/divergence-rules.md: separazione
+      netta divergenza/convergenza (anti-pattern: convergenza prematura), HMW
+      gate, diversità > quantità. Allineato al modello dm:journeys/dm:flows:
+      pattern "deduci dalle fonti → presenta → verifica", modalità
+      guided/yolo/headless, grounding corpus via dm:research-corpus (degrada a
+      scansione diretta), handoff downstream dm:concept. Output in
+      docs/design/ideation/.

@@ -8,8 +8,8 @@
 - **Nome:** `dm-revise` (comando `dm:revise`).
 - **Famiglia:** dominio `design` → `.claude/skills/dm-revise/` (convenzione comandi dm-*).
 - **Intent:** rivedere un flow editando il suo prototipo, vedendo le modifiche, senza riscrivere l'md a mano.
-- **Chi la invoca / cosa produce:** utente finale; produce un `changeset-*.md` (handoff) e, via
-  `dm:flows --ingest`, un `flow-*.md` aggiornato.
+- **Chi la invoca / cosa produce:** utente finale; produce un `*-changeset-*.md` (handoff) e, via
+  `dm:flows --ingest`, un `*-flow-*.md` aggiornato.
 
 ## Area 2 — Dominio e perimetro
 - **Dominio:** design (round-trip edit→flow). **Scope-in:** catturare delta di *contratto* da una

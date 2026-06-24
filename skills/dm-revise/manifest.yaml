@@ -23,7 +23,7 @@ io_schema:
       type: path         # il prototipo HTML da rivedere (prodotto da dm:prototype)
       required: false
     - field: target_flow
-      type: path         # il flow-*.md di provenienza; dedotto dal meta del prototipo o --flow
+      type: path         # il *-flow-*.md di provenienza; dedotto dal meta del prototipo o --flow
       required: false
   output:
     - artifact: changeset
@@ -71,7 +71,7 @@ evolution_log:
     summary: >
       Due robustezze emerse dal banco di prova §10. (1) Risoluzione del target_flow in cascata:
       --flow > meta se risolve su disco > ricerca per-basename sotto l'albero progetto (gestisce i
-      repo rilocati dove il meta porta il path canonico docs/dome/flows/... inesistente) > chiedi.
+      repo rilocati dove il meta porta il path canonico docs/design/flows/... inesistente) > chiedi.
       (2) Gestione degli edit ambigui nel filtro decisione-vs-ritocco: guided chiede guidando con
       l'ipotesi; yolo/headless scompone (logga solo la parte-contratto) e, se indecidibile, tratta
       come ritocco ma lo SEGNALA nel report invece di perderlo in silenzio. Solo wording.
@@ -89,7 +89,7 @@ evolution_log:
       Prima versione. Atom-dominio produttore del round-trip edit→flow (deliverable A di
       .notes/analysis/edit-to-flow-process-spec.md). Sessione di edit guidata sul prototipo con
       log live degli edit ancorati a sc.<slug>/s.<slug>, filtro decisione-vs-ritocco (solo i delta
-      di contratto entrano), export di un changeset-*.md conforme a changeset-contract@1.0.0, e
+      di contratto entrano), export di un *-changeset-*.md conforme a changeset-contract@1.0.0, e
       chiusura via handoff a dm:flows --ingest (il proprietario del flow, deliverable B). HTML
       transitorio, flow durevole. Riclassificata in fase architect da composite (α) a atom-dominio
       + handoff (β): il decision tree del metodo segnala che un "composite" a 1-atomo orchestrato

@@ -9,7 +9,7 @@ Il prototipo serve a **vedere il flow funzionare**. Ogni decisione di rendering 
 ## Struttura su disco
 
 ```
-docs/dome/prototypes/[flow-slug]/
+docs/design/prototypes/YYYY-MM-DD-[flow-slug]-01/
 ├── index.html          # payload: punto d'ingresso navigabile
 ├── assets/
 │   └── mock.json       # opzionale: dati mock se non inline

@@ -1,8 +1,8 @@
 # Changeset Contract — il contratto edit-prototipo → flow
 
 Reference **condivisa** fra il produttore (`dm:revise`) e il consumatore (`dm:flows`,
-ramo **ingest**). Definisce **una sola cosa**: la forma di un `changeset-*.md` perché
-`dm:flows` possa assorbirne i delta in un `flow-*.md` esistente **anchor-preserving e senza
+ramo **ingest**). Definisce **una sola cosa**: la forma di un `*-changeset-*.md` perché
+`dm:flows` possa assorbirne i delta in un `*-flow-*.md` esistente **anchor-preserving e senza
 inventare**. È il perno che disaccoppia chi cattura gli edit (la sessione guidata sul
 prototipo) da chi li deposita nel contratto (il proprietario del flow): se la forma del
 changeset cambia, si bumpa **qui**, e il drift diventa visibile via `schema_version` invece
@@ -32,7 +32,7 @@ Canonico `02-principio-handoff@1.1.0`, con i campi load-bearing per l'ingest:
 | `produced_by` | richiesto | `dm:revise@<versione>` |
 | `produced_at` | richiesto | ISO-8601 |
 | `principle_versions` | richiesto | almeno `handoff@1.1.0` |
-| `target_flow` | **richiesto** | path del `flow-*.md` da aggiornare. È il flow che ha generato il prototipo editato: l'ingest applica i delta **a questo file**, non ne sceglie un altro. |
+| `target_flow` | **richiesto** | path del `*-flow-*.md` da aggiornare. È il flow che ha generato il prototipo editato: l'ingest applica i delta **a questo file**, non ne sceglie un altro. |
 | `upstream` | richiesto | `[<prototype meta>, <target_flow>]` — provenienza: il prototipo editato e il flow bersaglio. |
 | `consumed_by` | richiesto | `dm:flows` |
 | `status` | richiesto | `complete` quando esportato su "soddisfatto". |
@@ -54,7 +54,7 @@ Una sezione `## Delta` con una riga per cambiamento di contratto:
 
 ### Tipi di delta ammessi e dove atterrano nel flow
 
-| `tipo` | Significato | Dove atterra nel `flow-*.md` |
+| `tipo` | Significato | Dove atterra nel `*-flow-*.md` |
 |--------|-------------|------------------------------|
 | `add-element` | nuovo campo/CTA su una schermata | riga `sc.<slug>` → colonna *Elementi UI / CTA (con stato)* |
 | `add-state` | nuovo stato da materializzare | riga `sc.<slug>` → colonna *Stati da materializzare* (enumerazione) |

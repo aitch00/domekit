@@ -33,10 +33,10 @@ triage:
 io_schema:
   input:
     - field: flow
-      type: handoff          # docs/dome/flows/flow-*.md (markdown handoff)
+      type: handoff          # docs/design/flows/*-flow-*.md (markdown handoff)
       required: true
     - field: domain_model
-      type: handoff          # docs/dome/domain-model/domain-model.md
+      type: handoff          # docs/design/domain-model/YYYY-MM-DD-domain-model-01.md
       required: false
     - field: purpose
       type: enum[validation, client]

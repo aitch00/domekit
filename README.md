@@ -36,3 +36,4 @@ Le skill atterrano nella cartella convenzionale dell'agente (`.claude/skills/`
 per Claude Code, `.agents/skills/` per Cursor/Codex/Copilot).
 
 Indice completo delle skill: [`SKILLS.md`](./SKILLS.md).
+Storia dei rilasci per versione: [`CHANGELOG.md`](./CHANGELOG.md).

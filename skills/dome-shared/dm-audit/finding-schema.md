@@ -59,6 +59,7 @@ vs rigenerazione): vedi `dm-refine/references/refine-loop.md`.
 | `ux` | UX-Heuristic | SELF | ✅ `dm:audit-ux` | solo l'artefatto |
 | `flow-fidelity` | Fedeltà al flow | REF | ❌ locale (1 consumatore) | `source_flow` |
 | `mock-coherence` | Coerenza mock | REF | ❌ locale (1 consumatore) | `domain-model` |
+| `direction` | Fedeltà alla direzione | REF | ✅ `dm:audit-direction` | `design-context` + `tokens.css` |
 | `validation` | Validazione con utenti | EMP | ✅ `dm:validate` (ingest) | sessioni reali (note/registrazioni) |
 
 - **SELF** = serve solo l'artefatto → gira sempre, anche su input non-dome. Le 4 SELF sono **atomi
@@ -66,6 +67,10 @@ vs rigenerazione): vedi `dm-refine/references/refine-loop.md`.
 - **REF** = serve un handoff a monte → **degrada con nota** (finding `degraded: true`, P3) se la
   sorgente manca, non blocca. Le REF restano **locali** al target che le usa finché non emerge un
   secondo consumatore (test del riuso, `03-principio-atomi`); allora si promuovono ad atomo.
+  `direction` è la prima REF promossa ad **atomo dall'inizio**: il riuso è *intrinseco* (ogni
+  artefatto renderizzato ha una direzione), non emergente. È anche l'unica dimensione sull'asse
+  **derivazione** (fedeltà alla direzione dichiarata, `design-foundations/02-fedelta-e-craft`),
+  mentre le SELF stanno sull'asse *artefatto* (qualità intrinseca).
 - **EMP** = empirica: il finding nasce da **osservazione di utenti reali**, non da euristica.
   L'`evidence` è obbligatoria (citazione/osservazione di sessione + n. sessioni che convergono).
   Un finding EMP con una sola sessione a supporto resta P3-informativo finché non converge (≥2).

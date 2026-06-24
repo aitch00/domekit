@@ -6,7 +6,7 @@ argument-hint: "[--yolo] [--autonomous / mode:headless]"
 
 # dm:domain-modeler
 
-Produce `docs/dome/domain-model/domain-model.md` con `erDiagram` Mermaid validato.
+Produce `docs/design/domain-model/YYYY-MM-DD-domain-model-01.md` con `erDiagram` Mermaid validato.
 
 La modalità di default **non chiede le entità da zero**: assorbe il contenuto condiviso, **deduce le entità**, e le fa **verificare** attraverso 4 gate.
 
@@ -16,7 +16,7 @@ La modalità di default **non chiede le entità da zero**: assorbe il contenuto 
 
 ### 1. Resume Check
 
-Scansiona `docs/dome/domain-model/domain-model.md`.
+Scansiona `docs/design/domain-model/YYYY-MM-DD-domain-model-01.md`.
 
 Se esiste:
 
@@ -48,10 +48,10 @@ dal vocabulary capture di brief/brainstorm (C1) — il digest lo segnala se pres
 
 **Scansiona il contenuto condiviso** per dedurre le entità del dominio (via digest o diretta in fallback):
 - `discovery/domain-glossary.md` — glossario esplicito, se presente
-- `docs/dome/product-brief/*.md` — entità di business e vocabolario
-- `docs/dome/brainstorming/*.md` — concetti emersi
-- `docs/dome/flows/flow-*.md` — oggetti manipolati negli step
-- `docs/dome/personas/persona-*.md` — entità legate agli attori
+- `docs/design/product-brief/*.md` — entità di business e vocabolario
+- `docs/design/brainstorming/*.md` — concetti emersi
+- `docs/design/flows/*-flow-*.md` — oggetti manipolati negli step
+- `docs/design/personas/*-persona-*.md` — entità legate agli attori
 - `PRD*.md`, `*brief*.md` — fonti legacy
 
 **Estrai le entità candidate** da tutte le fonti (nomi, attributi impliciti, relazioni suggerite). **Dichiara i gap**: entità o relazioni non deducibili.
@@ -144,9 +144,9 @@ Se approva: scrivi. Se richiede modifica: torna al gate indicato **conservando l
 
 ## Scrittura Output
 
-Crea `docs/dome/domain-model/` se non esiste.
+Crea `docs/design/domain-model/` se non esiste.
 
-Scrivi `docs/dome/domain-model/domain-model.md` seguendo `references/domain-model-template.md`:
+Scrivi `docs/design/domain-model/YYYY-MM-DD-domain-model-01.md` seguendo `references/domain-model-template.md`:
 - Frontmatter handoff (sotto)
 - Entity Catalog (tabella)
 - Relationships (tabella in linguaggio naturale)
@@ -181,7 +181,7 @@ weak_sections: [entità/relazioni dedotte a bassa confidenza o "nessuno"]
 dm:domain-modeler completato.
 
 Output:
-  docs/dome/domain-model/domain-model.md
+  docs/design/domain-model/YYYY-MM-DD-domain-model-01.md
 
 Entità: [N] · Relazioni: [N]
 

@@ -20,7 +20,7 @@ modes:
 io_schema:
   input:
     - field: shared_content
-      type: list[path]   # discovery/domain-glossary, docs/dome/product-brief, brainstorming, flows, personas, PRD
+      type: list[path]   # discovery/domain-glossary, docs/design/product-brief, brainstorming, flows, personas, PRD
       required: false
   output:
     - artifact: domain-model
@@ -81,5 +81,5 @@ evolution_log:
     summary: >
       Prima versione manifestata. Atomo-dominio di domain modeling allineato al
       dome-method v2: aggiunto manifest L4, output spostato sotto
-      docs/dome/domain-model/. Le 13 regole di validazione Mermaid erDiagram e il
+      docs/design/domain-model/. Le 13 regole di validazione Mermaid erDiagram e il
       template di output restano nelle references.

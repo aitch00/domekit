@@ -6,7 +6,7 @@ argument-hint: "[scenario-name] [--persona <slug>] [--yolo] [--autonomous / mode
 
 # dm:journeys
 
-Produce `docs/dome/journeys/` con un file per ogni journey e un `journeys-overview.md`.
+Produce `docs/design/journeys/` con un file per ogni journey e un `YYYY-MM-DD-journeys-overview-01.md`.
 
 La modalità di default **non interroga fase per fase**: assorbe il contenuto condiviso, **deduce 5-7 fasi**, e le fa **verificare/correggere**.
 
@@ -16,7 +16,7 @@ La modalità di default **non interroga fase per fase**: assorbe il contenuto co
 
 ### 1. Resume Check
 
-Scansiona `docs/dome/journeys/journey-*.md` (esclude `journeys-overview.md`).
+Scansiona `docs/design/journeys/*-journey-*.md` (esclude `YYYY-MM-DD-journeys-overview-01.md`).
 
 Se trovati, lista le journey esistenti (scenario + persona + `status`) e chiedi:
 
@@ -28,13 +28,13 @@ AskUserQuestion (header: "Journeys"):
 
 ### 2. Persona Check (soft dependency)
 
-Scansiona `docs/dome/personas/persona-*.md`.
+Scansiona `docs/design/personas/*-persona-*.md`.
 
 **Se trovati:** se `--persona <slug>` fornito, seleziona quella; altrimenti chiedi quale usare (in yolo/headless: usa la primary).
 
 **Se non trovati:** avvisa e offri di procedere con profilo inline:
 ```
-Nessuna persona trovata in docs/dome/personas/.
+Nessuna persona trovata in docs/design/personas/.
 Le journey funzionano meglio con personas definite.
 ```
 ```
@@ -64,9 +64,9 @@ bozza (load-bearing).
 
 **Scansiona il contenuto condiviso** (via digest o diretta in fallback):
 - la persona selezionata — il profilo cognitivo (decision style, attention) informa le emozioni
-- `docs/dome/flows/flow-*.md` — gli step operativi diventano touchpoint della journey
-- `docs/dome/product-brief/*.md`, `PRD*.md`, `*brief*.md` — obiettivi e contesto
-- `docs/dome/brainstorming/*.md` — momenti chiave emersi
+- `docs/design/flows/*-flow-*.md` — gli step operativi diventano touchpoint della journey
+- `docs/design/product-brief/*.md`, `PRD*.md`, `*brief*.md` — obiettivi e contesto
+- `docs/design/brainstorming/*.md` — momenti chiave emersi
 
 **Triage:** `lightweight` / `standard` / `deep` in base alle fonti.
 
@@ -160,9 +160,9 @@ Minimo 2 raccomandazioni (una per peak, una per end). In guided puoi chiedere co
 
 ### E. Scrittura File
 
-Crea `docs/dome/journeys/` se non esiste.
+Crea `docs/design/journeys/` se non esiste.
 
-Scrivi `docs/dome/journeys/journey-[scenario-slug]-[persona-slug].md` seguendo lo
+Scrivi `docs/design/journeys/YYYY-MM-DD-journey-[scenario-slug]-[persona-slug]-01.md` seguendo lo
 scheletro `role: single` di
 [`references/journey-template.md`](./references/journey-template.md) (frontmatter handoff
 + Contesto + Journey Map con anchor `p.<slug>` + Sentiment Timeline + Peak-End Analysis
@@ -182,7 +182,7 @@ AskUserQuestion (header: "Prossima journey"):
 
 ## Overview
 
-Dopo "ho finito", aggiorna `docs/dome/journeys/journeys-overview.md` seguendo lo
+Dopo "ho finito", aggiorna `docs/design/journeys/YYYY-MM-DD-journeys-overview-01.md` seguendo lo
 scheletro `role: overview` di
 [`references/journey-template.md`](./references/journey-template.md).
 
@@ -196,8 +196,8 @@ dm:journeys completato.
 Perimetro: [M] journey mappate su ~[N] stimate dal corpus.
 
 Output:
-  docs/dome/journeys/journeys-overview.md
-  docs/dome/journeys/journey-*.md ([N] file)
+  docs/design/journeys/YYYY-MM-DD-journeys-overview-01.md
+  docs/design/journeys/*-journey-*.md ([N] file)
 
 Next steps:
   /dm-flows   — approfondisci i touchpoint critici identificati nelle journey

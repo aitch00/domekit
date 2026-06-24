@@ -1,0 +1,89 @@
+skill: dm-ia
+version: 0.1.0
+type: atom-dominio
+domain: design          # verticale: design/UX research (collocata in .claude/skills come comando dm-*)
+category: information-architecture
+
+implements:
+  - principle: 03-principio-atomi
+    version: 1.1.0
+    status: in-sync
+  - principle: 02-principio-handoff
+    version: 1.1.0
+    status: in-sync
+
+modes:
+  - guided
+  - yolo
+  - headless
+
+io_schema:
+  input:
+    - field: flows
+      type: list[path]    # tutti gli output di dm:flows del progetto (fonte primaria)
+      required: false
+    - field: domain_model
+      type: path          # per allineare le entità navigabili al modello del dominio
+      required: false
+    - field: personas
+      type: list[path]    # per verificare la struttura contro i mental model
+      required: false
+    - field: platform
+      type: enum[mobile, desktop, responsive]
+      required: false
+    - field: brief
+      type: path          # vincoli di piattaforma
+      required: false
+  output:
+    - artifact: ia-map
+      format: markdown
+      schema: handoff-v1   # un file per progetto; 7 sezioni; frontmatter con upstream + weak_sections
+
+consumes_databases: []
+
+consumes_references:
+  - references/ia-heuristics.md   # 7 sfaccettature Morville + tabella necessità + limite predittivo
+  - references/ia-template.md     # scheletro di output (7 sezioni)
+
+handoff:
+  enabled: true
+  downstream:
+    - dm:prototype
+    - dm:spec
+    - dm:flows            # feedback: incongruenze IA ↔ flow tornano ai flow prima di prototipare
+
+research_policy:
+  intents: [corpus]
+  trigger: gap-driven            # corpus come grounding del discovery; 3 stadi (esplicito/default/gap-driven)
+
+consumes_contracts:
+  - contract: ../dome-shared/dm-research/research-digest-schema.md
+    schema_version: ">=0.1.0"    # consuma il digest corpus di dm:research-corpus
+
+harvest_policy:
+  domain: opt-in
+  solution: opt-in
+  method: auto-on-finalize   # emette [[harvest:finalize skill=dm-ia]]: il trigger engine propone dome:harvest --method a fine skill
+
+status: in-sync
+evolution_log:
+  - version: 0.1.0
+    date: 2026-06-23
+    type: initial
+    summary: >
+      Prima versione manifestata. Atomo-dominio di design per l'architettura
+      informativa (gap "Fase 4 — Architettura informativa",
+      docs/analysis/pipeline-gaps/04-information-architecture.md). Costruisce la
+      struttura navigazionale che connette i flow: ia-map a 7 sezioni (inventario
+      oggetti navigabili, navigation model, content types, labeling system,
+      routing/URL, stati globali, findability gaps). Regole load-bearing in
+      references/ia-heuristics.md: 7 sfaccettature di Morville come review,
+      tabella di necessità (gate soft di attivazione: bassa sotto 2-3 flow, alta
+      sopra), limite predittivo dichiarato (non predice il mental model reale →
+      findability gaps come ipotesi + test reale proposto). Completezza
+      domain-model (ogni entità navigabile ha un entry, altrimenti gap di
+      prodotto) e feedback upstream ai flow su incongruenze. Allineato al modello
+      dm:flows: deduci → presenta → verifica, modalità guided/yolo/headless,
+      grounding corpus via dm:research-corpus (degrada a scansione diretta).
+      Upstream dm:flows (primario) + dm:domain-modeler; handoff downstream
+      dm:prototype, dm:spec, dm:flows (feedback). Output in docs/design/ia/.

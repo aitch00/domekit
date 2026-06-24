@@ -23,7 +23,7 @@ correlazione (occupation table) e non da evidenza, vanno marcati in `weak_sectio
 
 ## 1 · Persona (role: single)
 
-File: `docs/dome/personas/persona-[type]-[name-slug].md`
+File: `docs/design/personas/YYYY-MM-DD-persona-[type]-[name-slug]-01.md`
 
 ```markdown
 ---
@@ -102,7 +102,7 @@ Mappatura severity→numero per `bias_resistance`: `low=2 · medium=5 · high=8`
 
 ## 2 · Personas Overview (role: overview)
 
-File: `docs/dome/personas/personas-overview.md`
+File: `docs/design/personas/YYYY-MM-DD-personas-overview-01.md`
 
 ```markdown
 ---

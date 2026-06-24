@@ -6,7 +6,7 @@ argument-hint: "[feature-name] [--yolo] [--autonomous / mode:headless] [--ingest
 
 # dm:flows
 
-Produce `docs/dome/flows/` con un file per ogni flow e un `flows-overview.md`.
+Produce `docs/design/flows/` con un file per ogni flow e un `YYYY-MM-DD-flows-overview-01.md`.
 
 La modalità di default **non interroga step per step**: assorbe il contenuto condiviso, **deduce un happy path**, e lo fa **verificare/correggere**.
 
@@ -22,12 +22,12 @@ La modalità di default **non interroga step per step**: assorbe il contenuto co
 | (altrimenti) | **Creazione/Resume** (il flusso standard qui sotto). |
 
 L'ingest è il **ramo ricevente** del round-trip edit→flow: `dm:revise` cattura gli edit sul
-prototipo e ne esporta un `changeset-*.md`; `dm:flows` è il proprietario del flow e l'unico
+prototipo e ne esporta un `*-changeset-*.md`; `dm:flows` è il proprietario del flow e l'unico
 che lo riscrive. Non duplicare altrove la scrittura del flow.
 
 ### 1. Resume Check
 
-Scansiona `docs/dome/flows/flow-*.md` (esclude `flows-overview.md`).
+Scansiona `docs/design/flows/*-flow-*.md` (esclude `YYYY-MM-DD-flows-overview-01.md`).
 
 Se trovati, lista i flow esistenti (feature + `status`) e chiedi:
 
@@ -55,10 +55,10 @@ gap-driven su riferimenti che non tornano); se l'atomo non è disponibile,
 bozza (load-bearing).
 
 **Scansiona il contenuto condiviso** (via digest o diretta in fallback):
-- `docs/dome/journeys/journey-*.md` — semina i touchpoint/momenti critici (la journey precede il flow)
-- `docs/dome/personas/persona-*.md` — gli attori e il loro profilo cognitivo
-- `docs/dome/domain-model/domain-model.md` — le entità che il flow manipola
-- `docs/dome/product-brief/*.md`, `PRD*.md`, `*brief*.md` — feature e obiettivi
+- `docs/design/journeys/*-journey-*.md` — semina i touchpoint/momenti critici (la journey precede il flow)
+- `docs/design/personas/*-persona-*.md` — gli attori e il loro profilo cognitivo
+- `docs/design/domain-model/YYYY-MM-DD-domain-model-01.md` — le entità che il flow manipola
+- `docs/design/product-brief/*.md`, `PRD*.md`, `*brief*.md` — feature e obiettivi
 
 **Triage:** `lightweight` (0-1 fonti) / `standard` (2-5) / `deep` (6+).
 
@@ -129,9 +129,9 @@ Calcola la severity combinata e produci i findings (questa è la fase di Review 
 
 ### E. Scrittura File
 
-Crea `docs/dome/flows/` se non esiste.
+Crea `docs/design/flows/` se non esiste.
 
-Scrivi `docs/dome/flows/flow-[feature-slug].md` seguendo lo scheletro `role: single` di
+Scrivi `docs/design/flows/YYYY-MM-DD-flow-[feature-slug]-01.md` seguendo lo scheletro `role: single` di
 [`references/flow-template.md`](./references/flow-template.md) (frontmatter handoff +
 Overview + Happy Path con anchor `s.<slug>`, System Response e Outcome→ + Screen Inventory
 con anchor `sc.<slug>` (UI/CTA + stato dati) + Diagramma Mermaid + Percorsi Alternativi /
@@ -152,14 +152,14 @@ AskUserQuestion (header: "Prossimo flow"):
 
 ## Overview
 
-Dopo "ho finito", aggiorna `docs/dome/flows/flows-overview.md` seguendo lo scheletro
+Dopo "ho finito", aggiorna `docs/design/flows/YYYY-MM-DD-flows-overview-01.md` seguendo lo scheletro
 `role: overview` di [`references/flow-template.md`](./references/flow-template.md).
 
 ---
 
 ## Ingest Changeset (ramo ricevente del round-trip)
 
-Attivato da `--ingest <changeset.md>`. Assorbe i delta di un changeset in un `flow-*.md`
+Attivato da `--ingest <changeset.md>`. Assorbe i delta di un changeset in un `*-flow-*.md`
 esistente, **anchor-preserving e con gate**. Riusa la disciplina anchor della Creazione
 (Step E / Regole): non rinumera, conia anchor solo per `add-screen`/`NEW`, ritira (mai riusa)
 gli anchor su `remove`.
@@ -168,7 +168,7 @@ gli anchor su `remove`.
 
 Leggi il changeset; deve essere conforme a
 [`changeset-contract@1.0.0`](../dome-shared/dm-design/changeset-contract.md):
-- frontmatter con `type: changeset`, `target_flow` (il `flow-*.md` da aggiornare), `status: complete`;
+- frontmatter con `type: changeset`, `target_flow` (il `*-flow-*.md` da aggiornare), `status: complete`;
 - una sezione `## Delta` con la tabella (`# · anchor · tipo · richiesta · dettaglio`).
 
 Apri il `target_flow`. **Non-conformità** (frontmatter mancante, `target_flow` inesistente,
@@ -202,7 +202,7 @@ Per ogni riga di `## Delta`, risolvi l'atterraggio nel flow (vedi il contratto, 
 Presenta la diff proposta per anchor:
 
 ```
-Ingest changeset → flow-[feature].md ([N] delta)
+Ingest changeset → YYYY-MM-DD-flow-[feature]-01.md ([N] delta)
 
   sc.checkout   add-element    + campo telefono (required)          ["voglio il telefono"]
   s.submit      change-outcome   Outcome → da sc.home a sc.summary  ["dopo il pagamento → riepilogo"]
@@ -226,7 +226,7 @@ aggiorna in coerenza. Aggiorna il frontmatter del flow: `upstream` += il changes
 ```
 dm:flows ingest completato.
 
-  Flow:      docs/dome/flows/flow-[feature].md
+  Flow:      docs/design/flows/YYYY-MM-DD-flow-[feature]-01.md
   Changeset: [path]  ([N] delta applicati, [M] anchor coniati, [K] ritirati)
 
 Next step:
@@ -241,8 +241,8 @@ Next step:
 dm:flows completato.
 
 Output:
-  docs/dome/flows/flows-overview.md
-  docs/dome/flows/flow-*.md ([N] file)
+  docs/design/flows/YYYY-MM-DD-flows-overview-01.md
+  docs/design/flows/*-flow-*.md ([N] file)
 
 Next steps:
   /dm-domain-modeler   — modella le entità che questi flow manipolano

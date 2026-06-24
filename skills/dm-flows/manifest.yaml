@@ -24,10 +24,10 @@ io_schema:
       type: string
       required: false
     - field: shared_content
-      type: list[path]   # docs/dome/journeys, personas, domain-model, product-brief, PRD
+      type: list[path]   # docs/design/journeys, personas, domain-model, product-brief, PRD
       required: false
     - field: changeset
-      type: path         # ramo ingest: changeset-*.md (changeset-contract) da assorbire nel target_flow
+      type: path         # ramo ingest: *-changeset-*.md (changeset-contract) da assorbire nel target_flow
       required: false
   output:
     - artifact: flow
@@ -47,7 +47,7 @@ consumes_references:
 handoff:
   enabled: true
   upstream:
-    - dm:revise      # ramo ingest: consuma il changeset-*.md prodotto da dm:revise
+    - dm:revise      # ramo ingest: consuma il *-changeset-*.md prodotto da dm:revise
   downstream:
     - dm:domain-modeler
     - dm:prototype   # consuma Happy Path + Screen Inventory come contratto materiale
@@ -83,7 +83,7 @@ evolution_log:
     type: minor
     summary: >
       Aggiunto il ramo INGEST (modalità ingest): dm:flows diventa il ricevente del
-      round-trip edit→flow. Assorbe un changeset-*.md (changeset-contract@1.0.0, prodotto
+      round-trip edit→flow. Assorbe un *-changeset-*.md (changeset-contract@1.0.0, prodotto
       da dm:revise) in un flow esistente, anchor-preserving e con gate — riusando la
       disciplina anchor già presente (mai rinumerare, conia solo su add-screen/NEW, ritira
       su remove). Routing in testa a On Activation (creazione vs ingest); nuova sezione
@@ -165,6 +165,6 @@ evolution_log:
     summary: >
       Prima versione manifestata. Atomo-dominio di design-research derivato dal
       processo meepo-plugin (behavioral-ux / cognitive-load) e allineato al
-      dome-method v2: aggiunto manifest L4, output spostato sotto docs/dome/flows/,
+      dome-method v2: aggiunto manifest L4, output spostato sotto docs/design/flows/,
       next-step corretto. L'analisi cognitiva automatica (Hick, Miller 7+-2,
       context switching) resta nelle references; nessuna dipendenza dal plugin meepo.

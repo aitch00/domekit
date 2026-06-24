@@ -26,7 +26,7 @@ Carica `references/prototype-contract.md` (contratto dell'output HTML: wiring di
 
 ### 1. Resume Check
 
-Scansiona `docs/dome/prototypes/*/index.meta.yaml`.
+Scansiona `docs/design/prototypes/*/index.meta.yaml`.
 
 Se trovati, lista i prototipi esistenti (flow + `purpose` + `status`) e chiedi:
 
@@ -41,10 +41,10 @@ AskUserQuestion (header: "Prototipi"):
 Il flow è l'**upstream obbligatorio**: senza, l'atomo non procede.
 
 - Se `flow-path` è passato come argomento, usa quello.
-- Altrimenti scansiona `docs/dome/flows/flow-*.md` (esclude `flows-overview.md`). Se uno solo → usalo; se molti → chiedi quale.
+- Altrimenti scansiona `docs/design/flows/*-flow-*.md` (esclude `YYYY-MM-DD-flows-overview-01.md`). Se uno solo → usalo; se molti → chiedi quale.
 - Se **nessun flow** esiste:
   ```
-  Nessun flow trovato in docs/dome/flows/.
+  Nessun flow trovato in docs/design/flows/.
   dm:prototype materializza un flow esistente — serve prima dm:flows.
   ```
   Offri di uscire e lanciare `dm:flows`. Non inventare un flow da zero.
@@ -59,7 +59,7 @@ Leggi il flow secondo il **flow-handoff-contract** (`../dome-shared/dm-design/fl
 Lo Screen Inventory è **obbligatorio**: è il contratto materiale che evita di inventare. Se manca
 (flow non conforme al contratto), **non improvvisare** — manda a `dm:flows` a rigenerare il flow.
 
-**Domain-model (upstream opzionale).** Scansiona `docs/dome/domain-model/domain-model.md`. Se presente, caricalo: alza la qualità dei mock (campi ed entità coerenti). Se assente, procedi con mock plausibili e dichiaralo in `weak_sections`.
+**Domain-model (upstream opzionale).** Scansiona `docs/design/domain-model/YYYY-MM-DD-domain-model-01.md`. Se presente, caricalo: alza la qualità dei mock (campi ed entità coerenti). Se assente, procedi con mock plausibili e dichiaralo in `weak_sections`.
 
 ### 3. Mode Detection
 
@@ -144,7 +144,7 @@ Se una risposta è "no", correggi. Annota i limiti residui in `weak_sections`.
 
 ### F. Scrittura payload + sidecar
 
-Crea `docs/dome/prototypes/[flow-slug]/`:
+Crea `docs/design/prototypes/YYYY-MM-DD-[flow-slug]-01/`:
 - `index.html` (+ eventuale `assets/mock.json`) — il payload
 - `index.meta.yaml` — il sidecar handoff:
 
@@ -155,9 +155,9 @@ phase: design
 status: draft          # complete solo dopo la validazione utente (Guided)
 generated_by: dm:prototype
 upstream:              # catena verso il flow (e domain-model se usato)
-  - docs/dome/flows/flow-[slug].md
-  - docs/dome/domain-model/domain-model.md   # ometti se assente
-source_flow: docs/dome/flows/flow-[slug].md
+  - docs/design/flows/YYYY-MM-DD-flow-[slug]-01.md
+  - docs/design/domain-model/YYYY-MM-DD-domain-model-01.md   # ometti se assente
+source_flow: docs/design/flows/YYYY-MM-DD-flow-[slug]-01.md
 purpose: [validation|client]
 triage: [lightweight|deep]
 screens_count: [int]
@@ -172,7 +172,7 @@ weak_sections: [es. "domain-model assente: mock plausibili non verificati" o "ne
 In Guided, il **gate è l'utente** — nessun confidence-gating automatico.
 
 ```
-Prototipo pronto: docs/dome/prototypes/[flow-slug]/index.html
+Prototipo pronto: docs/design/prototypes/YYYY-MM-DD-[flow-slug]-01/index.html
 Aprilo nel browser e percorri il flow.
 ```
 
@@ -195,8 +195,8 @@ In Headless: salta il gate, lascia `status: draft`.
 dm:prototype completato.
 
 Output:
-  docs/dome/prototypes/[flow-slug]/index.html   (payload)
-  docs/dome/prototypes/[flow-slug]/index.meta.yaml   (handoff sidecar)
+  docs/design/prototypes/YYYY-MM-DD-[flow-slug]-01/index.html   (payload)
+  docs/design/prototypes/YYYY-MM-DD-[flow-slug]-01/index.meta.yaml   (handoff sidecar)
 
 Flow: [feature]  ·  Schermate: [N]  ·  Triage: [lightweight|deep]  ·  Status: [draft|complete]
 

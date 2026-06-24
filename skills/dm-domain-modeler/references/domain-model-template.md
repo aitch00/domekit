@@ -1,6 +1,6 @@
 # Domain Model Template
 
-Output structure for `docs/dome/domain-model/domain-model.md`. Use `[placeholder]` syntax for all variable content — never `{{VARIABLE}}`.
+Output structure for `docs/design/domain-model/YYYY-MM-DD-domain-model-01.md`. Use `[placeholder]` syntax for all variable content — never `{{VARIABLE}}`.
 
 ---
 

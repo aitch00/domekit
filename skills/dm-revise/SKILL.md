@@ -9,10 +9,10 @@ argument-hint: "[prototipo] [--flow <flow.md>] [--yolo] [--autonomous / mode:hea
 ## Overview
 
 Atomo-dominio L1 del design. Apre un prototipo HTML (prodotto da `dm:prototype` da un
-`flow-*.md`), conduce una **sessione di edit guidata** in cui l'utente chiede modifiche che
+`*-flow-*.md`), conduce una **sessione di edit guidata** in cui l'utente chiede modifiche che
 vengono **applicate all'HTML live per farle vedere**, e **mentre le applica le registra**
 mappate alla schermata/step del flow (`sc.<slug>` / `s.<slug>`). Su "soddisfatto" esporta un
-`changeset-*.md` conforme a `changeset-contract@1.0.0` e **chiude chiamando `dm:flows --ingest`**
+`*-changeset-*.md` conforme a `changeset-contract@1.0.0` e **chiude chiamando `dm:flows --ingest`**
 (handoff): il flow — la verità durevole — assorbe i delta anchor-preserving; l'HTML è usa-e-getta.
 
 Implementa `03-principio-atomi@1.1.0`. È il **lato produttore** del round-trip edit→flow; il lato
@@ -26,7 +26,7 @@ Dominio: design. Categoria: ux-research (round-trip). **Non** consuma database L
 
 Produce-conforme a [`../dome-shared/dm-design/changeset-contract.md`](../dome-shared/dm-design/changeset-contract.md)@1.0.0
 (handoff verso `dm:flows`). Assume in input un **prototipo materializzato da un flow**: il
-prototipo porta il riferimento al `flow-*.md` di provenienza (sidecar/meta o, in fallback,
+prototipo porta il riferimento al `*-flow-*.md` di provenienza (sidecar/meta o, in fallback,
 `--flow`). Questo è il vincolo che tiene il processo semplice → vedi *Vincolo* sotto.
 
 > **Vincolo (perché resta semplice):** edit e cattura avvengono **nella stessa sessione**, che ha
@@ -44,12 +44,12 @@ prototipo porta il riferimento al `flow-*.md` di provenienza (sidecar/meta o, in
   1. `--flow <flow.md>` se passato (vince sempre);
   2. dal meta/sidecar del prototipo (`source_flow` / `upstream`): se il path **risolve su disco**, usalo;
   3. **se il path del meta non esiste** (tipico in repo rilocati: il meta porta il path *canonico di
-     generazione* `docs/dome/flows/...`, non la posizione reale), **cerca per basename** il
+     generazione* `docs/design/flows/...`, non la posizione reale), **cerca per basename** il
      `flow-<slug>.md` sotto l'albero del progetto (es. `**/flows/flow-<slug>.md`); se c'è un solo
      match, usalo; se più d'uno, chiedi quale;
   4. ultimo fallback: chiedi.
   **Senza un flow bersaglio risolto, ferma**: il changeset ha bisogno di `target_flow`.
-- Carica il `flow-*.md` per avere la **mappa anchor** (Screen Inventory `sc.<slug>` + Happy Path
+- Carica il `*-flow-*.md` per avere la **mappa anchor** (Screen Inventory `sc.<slug>` + Happy Path
   `s.<slug>`): è la legenda con cui ancori ogni edit.
 - **Gate di conformità del flow.** Se il flow non ha mappa anchor (Screen Inventory assente, zero
   `sc.`/`s.` — flow **legacy pre-`flow-handoff-contract@1.0.0`**), **ferma con rimedio**: *"il flow
@@ -118,7 +118,7 @@ AskUserQuestion (header: "Edit"):
 
 ## Export del changeset (su "soddisfatto")
 
-Scrivi `docs/dome/changesets/changeset-<feature-slug>.md` conforme a
+Scrivi `docs/design/changesets/YYYY-MM-DD-changeset-<feature-slug>-01.md` conforme a
 [`changeset-contract@1.1.0`](../dome-shared/dm-design/changeset-contract.md): frontmatter
 (`type: changeset`, `target_flow`, `upstream: [<prototipo>, <target_flow>]`, `consumed_by: dm:flows`,
 `status: complete`, **`source: edit`**) + sezione `## Delta` con tutte le righe di contratto loggate.
@@ -132,7 +132,7 @@ fermati: non c'è nulla da depositare nel flow.
 Salvo `--no-apply`, chiudi invocando il ramo ricevente:
 
 ```
-Skill dm-flows  (argomenti: --ingest docs/dome/changesets/changeset-<feature-slug>.md, + modalità)
+Skill dm-flows  (argomenti: --ingest docs/design/changesets/YYYY-MM-DD-changeset-<feature-slug>-01.md, + modalità)
 ```
 
 `dm:flows` ingest applica i delta al `target_flow` anchor-preserving **con il proprio gate** (è il
@@ -140,14 +140,14 @@ proprietario del flow: l'unico che lo riscrive). `dm:revise` **non scrive mai il
 
 ## Output
 
-- `docs/dome/changesets/changeset-<feature-slug>.md` — handoff `changeset-contract@1.0.0`.
-- (effetto, via dm:flows) `docs/dome/flows/flow-<feature-slug>.md` aggiornato anchor-preserving.
+- `docs/design/changesets/YYYY-MM-DD-changeset-<feature-slug>-01.md` — handoff `changeset-contract@1.0.0`.
+- (effetto, via dm:flows) `docs/design/flows/flow-<feature-slug>.md` aggiornato anchor-preserving.
 
 ```
 dm:revise completato.
 
-  Changeset: docs/dome/changesets/changeset-<feature>.md  ([N] delta di contratto, [R] ritocchi scartati)
-  Flow:      docs/dome/flows/flow-<feature>.md  (aggiornato via dm:flows ingest)
+  Changeset: docs/design/changesets/YYYY-MM-DD-changeset-<feature>-01.md  ([N] delta di contratto, [R] ritocchi scartati)
+  Flow:      docs/design/flows/flow-<feature>.md  (aggiornato via dm:flows ingest)
 
 Next step:
   /dm-prototype <feature>   — rigenera il prototipo pulito dal flow aggiornato
