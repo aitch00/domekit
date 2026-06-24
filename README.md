@@ -1,39 +1,41 @@
-# Domekit — plugin
+# Domekit
 
-Plugin installabile delle skill del **dome-method** (Domekit). Questo repo è un
-**marketplace di plugin**: contiene `.claude-plugin/` (`marketplace.json` +
-`plugin.json`), le `skills/` (con contratti e database in `skills/dome-shared/`)
-e l'indice `SKILLS.md`. Le skill sono autocontenute.
+Skill del **dome-method** (Domekit) per discovery, design e prototipazione di
+prodotti digitali — **agnostiche**: funzionano su Claude Code, Cursor, Codex,
+OpenCode, Gemini, Copilot e altri agenti. Il repo contiene le `skills/` (con
+contratti e database in `skills/dome-shared/`), l'indice `SKILLS.md` e i manifest
+plugin in `.claude-plugin/`. Le skill sono autocontenute.
 
-## Installazione (plugin — consigliata)
+## Installazione (agnostica — consigliata)
 
-Installato come plugin, Domekit vive nello store globale del tuo agente: le skill
-sono invocabili in **qualsiasi progetto** senza copiarne i file nel repo.
+Con il CLI [`skills`](https://www.skills.sh/) (richiede Node.js 18+). Rileva
+l'agente installato e mette le skill nella cartella giusta:
 
-**Claude Code:**
+```bash
+npx skills add aitch00/domekit
+```
+
+Aggiornamento:
+
+```bash
+npx skills update
+```
+
+Opzioni utili: `-a claude-code` (mira un agente specifico), `-g` (install
+**globale** invece che nel progetto), `-y` (non interattivo, per CI).
+
+## Installazione come plugin (scorciatoia per Claude Code)
+
+Solo su Claude Code, in alternativa, puoi installarlo come plugin (globale, con
+update che rimuove anche ciò che sparisce a monte):
 
 ```
 /plugin marketplace add aitch00/domekit
 /plugin install domekit
-```
-
-Aggiornamento (sincronizza davvero: aggiunge, aggiorna e rimuove ciò che non c'è più):
-
-```
 /plugin update domekit
 ```
 
-## Installazione alternativa (set flat via npx)
-
-Se preferisci copiare le skill dentro il progetto (Node.js 18+):
-
-```bash
-npx skills add aitch00/domekit
-npx skills update
-```
-
-Le skill atterrano nella cartella convenzionale dell'agente (`.claude/skills/`
-per Claude Code, `.agents/skills/` per Cursor/Codex/Copilot).
+---
 
 Indice completo delle skill: [`SKILLS.md`](./SKILLS.md).
 Storia dei rilasci per versione: [`CHANGELOG.md`](./CHANGELOG.md).
